@@ -3,11 +3,11 @@ module.exports = {
   // Change this to your firebase configuration! (Add Firebase to your web app)
   FIREBASE_CONFIG: {
 
-    apiKey: "AIzaSyAAzWIkcMqyHueh1yQt84HdpMFfzL1OZYc",
-    authDomain: "react-redux-firebase-d6283.firebaseapp.com",
-    databaseURL: "https://react-redux-firebase-d6283.firebaseio.com",
-    storageBucket: "react-redux-firebase-d6283.appspot.com",
-    messagingSenderId: "425723634684"
+    apiKey: "AIzaSyAv8x3Y2So433zQHkUZUd_iJhrubrOW5c0",
+    authDomain: "mediscope-147700.firebaseapp.com",
+    databaseURL: "https://mediscope-147700.firebaseio.com",
+    storageBucket: "mediscope-147700.appspot.com",
+    messagingSenderId: "514967463828"
 
   }
 };

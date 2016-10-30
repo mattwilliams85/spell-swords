@@ -5,8 +5,41 @@ export const firebaseApp = firebase.initializeApp(FIREBASE_CONFIG);
 export const firebaseAuth = firebaseApp.auth();
 export const firebaseDb = firebaseApp.database();
 
-var FireBaseTools = {
+const medRef = firebaseDb.ref().child('medications')
 
+var FireBaseTools = {
+  objectToArray: (data) => {
+    let dataWithKeys = Object.keys(data).map((key) => {
+       var obj = data[key];
+       obj._key = key;
+       return obj
+    });
+    return dataWithKeys
+  },
+
+  fetchMedications: () => {
+    return new Promise((resolve, reject) => {
+      medRef.once('value', function(snap) {
+        let data = FireBaseTools.objectToArray(snap.val())
+        resolve(data)
+      })
+    })
+  },
+
+ deleteMedications: () => {
+    return new Promise((resolve, reject) => {
+     medRef.once('value', function(snap) { resolve(snap.val()) })
+    })
+  },
+
+  createMedication: (brand, generic) => {
+     return new Promise((resolve, reject) => {
+       medRef.push({
+        brand: brand,
+        generic: generic
+       })
+     })
+   },
   /**
    * Return an instance of a firebase auth provider based on the provider string.
    *

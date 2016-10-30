@@ -3,6 +3,7 @@ import { Route, IndexRoute } from 'react-router';
 import App from './components/app';
 
 import HomeIndex from './components/index_home';
+import MedicationView from './components/medication/view';
 import UserLogin from './components/user/login';
 import UserLogout from './components/user/logout';
 import UserRegister from './components/user/register';
@@ -15,6 +16,7 @@ export default (
     <IndexRoute component={HomeIndex} />
     <Route path="/login" component={UserLogin} />
     <Route path="/logout" component={UserLogout} />
+    <Route path="/medications" component={MedicationView} />
     <Route path="/register" component={UserRegister} />
     <Route path="/reset" component={ResetPassword} />
     <Route path="/profile" component={UserProfile} onEnter={requireAuth} />

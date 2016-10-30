@@ -61,7 +61,7 @@ class App extends Component {
             <nav className="collapse navbar-collapse bs-navbar-collapse" role="navigation">
               <ul className="nav navbar-nav">
                 <li><Link to="/"> Home</Link></li>
-                ,
+                <li><Link to="/medications"> Medications</Link></li>
               </ul>
               <ul className="nav navbar-nav navbar-right">
                 { this.renderUserMenu(this.props.currentUser) }

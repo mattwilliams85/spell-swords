@@ -1,0 +1,16 @@
+{
+  "medications": [
+    {
+      "brand":"Adderall",
+      "generic":"Methylphenidate"
+    },
+    {
+      "brand":"Zoloft",
+      "generic":"Sertraline"
+    },
+    {
+      "brand":"Lamictal",
+      "generic":"Lamotrigine"
+    }
+  ]
+}
