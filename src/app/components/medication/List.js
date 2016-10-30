@@ -1,15 +1,15 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import { bindActionCreators } from 'redux';
-import {fetchMedications, deleteMedication} from '../../actions/medication'
+import {deleteMedication, subscribeToMedications } from '../../actions/medication'
 
 class MedList extends React.Component {
-  componentDidMount () {
-    this.props.fetchMedications()
+  componentWillMount () {
+    this.props.subscribeToMedications()
   }
 
-  deleteMed (id) {
-    this.props.deleteMedication(id)
+  deleteMed (key) {
+    this.props.deleteMedication(key)
   }
 
   render () {
@@ -23,7 +23,7 @@ class MedList extends React.Component {
             <MedItem
               key={med._key}
               props={med}
-              onClick={() => this.deleteMed(med.id)}
+              onClick={() => this.deleteMed(med._key)}
             />
           )
         }
@@ -43,12 +43,13 @@ const MedItem = ({onClick, props}) => (
 
 const mapStateToProps = (state) => {
   return {
-    medications: state.medications
+    medications: state.medications.entities,
+    errors: state.medications.errors
   }
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({fetchMedications, deleteMedication}, dispatch);
+  return bindActionCreators({deleteMedication, subscribeToMedications}, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MedList)

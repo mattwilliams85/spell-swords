@@ -14,10 +14,12 @@ class MedCreate extends React.Component {
 
   handleSubmit (event) {
     event.preventDefault()
-    this.props.createMedication(
+    return new Promise((resolve, reject) => {
+      this.props.createMedication(
                 this.state.brand,
                 this.state.generic)
-              .then(() => this.clearValues())
+    }).then(this.clearValues())
+
   }
 
   handleChange (event) {
@@ -25,7 +27,7 @@ class MedCreate extends React.Component {
   }
 
   clearValues () {
-    if (!this.props) this.setState({brand: '', generic: ''})
+    this.setState({brand: '', generic: ''})
   }
 
   render () {
@@ -39,6 +41,7 @@ class MedCreate extends React.Component {
             name='brand'
             value={this.state.brand}
             onChange={this.handleChange} />
+          <br />
           <label>Generic Name</label>
           <input
             type='text'

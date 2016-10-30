@@ -42,3 +42,6 @@ jspm_packages
 .idea/
 .vscode
 firebase-debug.log
+
+misc
+.DS_Store
