@@ -1,0 +1,21 @@
+{
+  "name": "mediscope",
+  "description": "My app description",
+  "main": "",
+  "authors": [
+    "mattwilliams85 <mattwilliams85@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/mattwilliams85/mediscope",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/vendor",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "mdi": "~1.7.22"
+  }
+}
