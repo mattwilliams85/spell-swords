@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {resetPasswordEmail} from '../../actions/firebase_actions';
+import {resetPasswordEmail} from '../../actions/auth';
 
 class ResetPassword extends Component {
   constructor(props) {

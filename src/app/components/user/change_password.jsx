@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { changePassword } from '../../actions/firebase_actions';
+import { changePassword } from '../../actions/auth';
 
 class ChangePassword extends Component {
 

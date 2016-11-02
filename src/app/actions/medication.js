@@ -1,14 +1,14 @@
-import FireBaseTools from '../utils/firebase';
+import FireBaseCtrl from '../controllers/medication';
 
 export function deleteMedication(key) {
-  FireBaseTools.deleteMedication(key);
+  FireBaseCtrl.deleteMedication(key);
   return {
     type: 'DELETE_MEDICATION_SUCCESS',
   }
 }
 
 export function createMedication (brand, generic) {
-  const request = FireBaseTools.createMedication(brand, generic)
+  const request = FireBaseCtrl.createMedication(brand, generic)
   return {
     type: 'CREATE_MEDICATION_SUCCESS',
     payload: request
@@ -18,6 +18,6 @@ export function createMedication (brand, generic) {
 export function subscribeToMedications() {
   return function(dispatch) {
     let type = 'FETCH_MEDICATIONS_SUCCESS'
-    FireBaseTools.subscribeToMedications(dispatch, type);
+    FireBaseCtrl.subscribeToMedications(dispatch, type);
   }
 }

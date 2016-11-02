@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import firebase from '../../utils/firebase';
+import firebase from '../../controllers/auth';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {fetchUser, updateUser}  from '../../actions/firebase_actions';
+import {fetchUser, updateUser}  from '../../actions/auth';
 import Loading  from '../helpers/loading';
 import ChangePassword from './change_password';
 

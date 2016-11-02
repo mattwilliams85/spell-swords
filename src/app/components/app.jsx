@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { fetchUser, logoutUser } from '../actions/firebase_actions';
+import { fetchUser, logoutUser } from '../actions/auth';
 
 class App extends Component {
 

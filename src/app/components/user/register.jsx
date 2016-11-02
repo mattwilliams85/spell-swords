@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { registerUser } from '../../actions/firebase_actions';
+import { registerUser } from '../../actions/auth';
 
 class UserRegister extends Component {
     constructor(props) {
