@@ -8,9 +8,10 @@ export function deleteMedication(key) {
 }
 
 export function createMedication (brand, generic) {
-  FireBaseTools.createMedication(brand, generic)
+  const request = FireBaseTools.createMedication(brand, generic)
   return {
     type: 'CREATE_MEDICATION_SUCCESS',
+    payload: request
   }
 }
 

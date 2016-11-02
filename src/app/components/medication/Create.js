@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { Component }  from 'react'
 import { connect } from 'react-redux'
 import { createMedication } from '../../actions/medication'
 import { bindActionCreators } from 'redux';
 
-class MedCreate extends React.Component {
+class MedCreate extends Component {
   constructor (props) {
     super(props)
     this.state = { brand: '',
@@ -14,11 +14,11 @@ class MedCreate extends React.Component {
 
   handleSubmit (event) {
     event.preventDefault()
-    return new Promise((resolve, reject) => {
+
       this.props.createMedication(
                 this.state.brand,
                 this.state.generic)
-    }).then(this.clearValues())
+                .then(this.clearValues())
 
   }
 

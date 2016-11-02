@@ -8,6 +8,7 @@ export const firebaseDb = firebaseApp.database();
 export const medRef = firebaseDb.ref().child('medications')
 
 export function objectToArray (data) {
+  if (!data) return
   let dataWithKeys = Object.keys(data).map((key) => {
      var obj = data[key];
      obj._key = key;
@@ -25,7 +26,7 @@ var FireBaseTools = {
      return medRef.push({
        brand: brand,
        generic: generic
-     })
+     }).then(data => { return data})
    },
 
    subscribeToMedications: (dispatch, type) => {

@@ -3,7 +3,7 @@ import { Route, IndexRoute } from 'react-router';
 import App from './components/app';
 
 import HomeIndex from './components/index_home';
-import MedicationView from './components/medication/view';
+import MedicationView from './components/medication/Container';
 import UserLogin from './components/user/login';
 import UserLogout from './components/user/logout';
 import UserRegister from './components/user/register';
