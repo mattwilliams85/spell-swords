@@ -11,7 +11,7 @@ module.exports = (options) => {
     entry: [
       `webpack-dev-server/client?http://localhost:${+options.port}`,
       'webpack/hot/dev-server',
-      Path.join(__dirname, '../src/app/index'),
+      Path.join(__dirname, '../app/index'),
     ],
     output: {
       path: Path.join(__dirname, '../dist'),
@@ -22,7 +22,7 @@ module.exports = (options) => {
     },
     module: {
       loaders: [
-        {test: /.jsx?$/, include: Path.join(__dirname, '../src/app'), loader: 'babel',},
+        {test: /.jsx?$/, include: Path.join(__dirname, '../app'), loader: 'babel',},
         {test: /\.jsx?$/, exclude: /(node_modules|bower_components)/, loader: 'babel'},
         {test: /\.css$/, loader: 'style-loader!css-loader'},
         {test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: "file"},
@@ -38,13 +38,13 @@ module.exports = (options) => {
         },
       }),
       new HtmlWebpackPlugin({
-        template: Path.join(__dirname, '../src/index.html'),
+        template: Path.join(__dirname, '../app/index.html'),
       }),
     ],
   };
 
   if (options.isProduction) {
-    webpackConfig.entry = [Path.join(__dirname, '../src/app/index')];
+    webpackConfig.entry = [Path.join(__dirname, '../app/index')];
 
     webpackConfig.plugins.push(
       new Webpack.optimize.OccurenceOrderPlugin(),

@@ -7,7 +7,7 @@ import chai, { expect } from 'chai';
 import chaiJquery from 'chai-jquery';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-import reducers from '../src/app/reducers';
+import reducers from '../app/reducers';
 
 global.document = jsdom.jsdom('<!doctype html><html><body></body></html>');
 global.window = global.document.defaultView;

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import firebase from '../../controllers/auth';
+import firebase from '../../api/auth';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {fetchUser, updateUser}  from '../../actions/auth';

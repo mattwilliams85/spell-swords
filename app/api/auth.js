@@ -1,6 +1,8 @@
-import {firebaseAuth} from './firebase';
+import {firebaseAuth, getRef, getUid} from './firebase';
 
-var FireBaseCtrl = {
+export let uid = getUid()
+
+var FireBaseAPI = {
   getProvider: (provider) => {
     switch (provider) {
     case 'email':
@@ -52,6 +54,7 @@ var FireBaseCtrl = {
   fetchUser: () => {
     return new Promise((resolve, reject) => {
       const unsub = firebaseAuth.onAuthStateChanged(user => {
+        if (user) uid = user.uid
         unsub();
         resolve(user);
       }, error => {
@@ -120,4 +123,4 @@ var FireBaseCtrl = {
   }
 };
 
-export default FireBaseCtrl;
+export default FireBaseAPI;

@@ -1,14 +1,14 @@
-import FireBaseCtrl from '../controllers/medication';
+import FireBaseAPI from '../api/medication';
 
 export function deleteMedication(key) {
-  FireBaseCtrl.deleteMedication(key);
+  FireBaseAPI.deleteMedication(key);
   return {
     type: 'DELETE_MEDICATION_SUCCESS',
   }
 }
 
 export function createMedication (brand, generic) {
-  const request = FireBaseCtrl.createMedication(brand, generic)
+  const request = FireBaseAPI.createMedication(brand, generic)
   return {
     type: 'CREATE_MEDICATION_SUCCESS',
     payload: request
@@ -18,6 +18,6 @@ export function createMedication (brand, generic) {
 export function subscribeToMedications() {
   return function(dispatch) {
     let type = 'FETCH_MEDICATIONS_SUCCESS'
-    FireBaseCtrl.subscribeToMedications(dispatch, type);
+    FireBaseAPI.subscribeToMedications(dispatch, type);
   }
 }
