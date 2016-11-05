@@ -1,25 +1,22 @@
-import React, { Component }  from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { createMedication } from '../../actions/medication'
-import { bindActionCreators } from 'redux';
+import { bindActionCreators } from 'redux'
 
 class MedCreate extends Component {
   constructor (props) {
     super(props)
     this.state = { brand: '',
                    generic: '' }
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleChange = this.handleChange.bind(this)
   }
 
   handleSubmit (event) {
     event.preventDefault()
 
-      this.props.createMedication(
-                this.state.brand,
-                this.state.generic)
-                .then(this.clearValues())
-
+    this.props.createMedication(this.state.brand, this.state.generic)
+              .then(this.clearValues())
   }
 
   handleChange (event) {
@@ -60,8 +57,8 @@ class MedCreate extends Component {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ createMedication }, dispatch);
+function mapDispatchToProps (dispatch) {
+  return bindActionCreators({ createMedication }, dispatch)
 }
 
-export default connect(null, mapDispatchToProps)(MedCreate);
+export default connect(null, mapDispatchToProps)(MedCreate)

@@ -1,12 +1,12 @@
-import { combineReducers } from 'redux';
-import FireBaseUserReducer from './auth';
-import MedicationsReducer from './medication';
-import NotificationReducer from './notification';
+import { combineReducers } from 'redux'
+import FireBaseUserReducer from './auth'
+import GameReducer from './game'
+import NotificationReducer from './notification'
 
 const rootReducer = combineReducers({
-    currentUser: FireBaseUserReducer,
-    medications: MedicationsReducer,
-    messages: NotificationReducer
-});
+  currentUser: FireBaseUserReducer,
+  games: GameReducer,
+  messages: NotificationReducer
+})
 
-export default rootReducer;
+export default rootReducer

@@ -1,9 +1,9 @@
-import FireBaseAPI from '../api/medication';
+import FireBaseAPI from '../api/medication'
 
-export function deleteMedication(key) {
-  FireBaseAPI.deleteMedication(key);
+export function deleteMedication (key) {
+  FireBaseAPI.deleteMedication(key)
   return {
-    type: 'DELETE_MEDICATION_SUCCESS',
+    type: 'DELETE_MEDICATION_SUCCESS'
   }
 }
 
@@ -15,9 +15,9 @@ export function createMedication (brand, generic) {
   }
 }
 
-export function subscribeToMedications() {
-  return function(dispatch) {
+export function subscribeToMedications () {
+  return function (dispatch) {
     let type = 'FETCH_MEDICATIONS_SUCCESS'
-    FireBaseAPI.subscribeToMedications(dispatch, type);
+    FireBaseAPI.subscribeToMedications(dispatch, type)
   }
 }

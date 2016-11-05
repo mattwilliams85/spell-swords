@@ -21,6 +21,7 @@ module.exports = (options) => {
       extensions: ['', '.js', '.jsx'],
     },
     module: {
+      preLoaders: [],
       loaders: [
         {test: /.jsx?$/, include: Path.join(__dirname, '../app'), loader: 'babel',},
         {test: /\.jsx?$/, exclude: /(node_modules|bower_components)/, loader: 'babel'},
@@ -30,6 +31,9 @@ module.exports = (options) => {
         {test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=application/octet-stream"},
         {test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=image/svg+xml"}
       ],
+    },
+    standard: {
+      parser: 'babel-eslint'
     },
     plugins: [
       new Webpack.DefinePlugin({
@@ -68,6 +72,12 @@ module.exports = (options) => {
     webpackConfig.module.loaders.push({
       test: /\.scss$/,
       loaders: ['style', 'css', 'sass'],
+    });
+
+    webpackConfig.module.preLoaders.push({
+      test: /\.jsx?$/,
+      loader: 'standard',
+      exclude: /(node_modules)/
     });
 
     webpackConfig.devServer = {

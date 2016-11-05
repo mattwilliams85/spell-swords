@@ -1,7 +1,7 @@
 import React from 'react'
-import {connect} from 'react-redux'
-import { bindActionCreators } from 'redux';
-import {deleteMedication, subscribeToMedications } from '../../actions/medication'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { deleteMedication, subscribeToMedications } from '../../actions/medication'
 
 class MedList extends React.Component {
   componentWillMount () {
@@ -48,8 +48,8 @@ const mapStateToProps = (state) => {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({deleteMedication, subscribeToMedications}, dispatch);
+function mapDispatchToProps (dispatch) {
+  return bindActionCreators({deleteMedication, subscribeToMedications}, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MedList)

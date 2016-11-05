@@ -1,88 +1,93 @@
-import React, { Component } from 'react';
-import { browserHistory } from 'react-router';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { registerUser } from '../../actions/auth';
+import React, { Component } from 'react'
+import { browserHistory } from 'react-router'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { registerUser } from '../../actions/auth'
 
 class UserRegister extends Component {
-    constructor(props) {
-      super(props);
-      this.onFormSubmit = this.onFormSubmit.bind(this);
-      this.state = {
-          message: '',
-      };
+  constructor (props) {
+    super(props)
+    this.onFormSubmit = this.onFormSubmit.bind(this)
+    this.state = {
+      message: ''
+    }
   }
 
-    onFormSubmit(event) {
-      event.preventDefault();
+  onFormSubmit (event) {
+    event.preventDefault()
 
-      const email = this.refs.email.value;
-      const password = this.refs.password.value;
-      this.props.registerUser({ email, password }).then((data) => {
-          if (data.payload.errorCode)
-            this.setState({ message: data.payload.errorMessage });
-          else
-          browserHistory.push('/profile');
+    const email = this.refs.email.value
+    const password = this.refs.password.value
+    const displayName = this.refs.displayName.value
+    this.props.registerUser({ email, password, displayName }).then((data) => {
+      if (data.payload.errorCode) {
+        this.setState({ message: data.payload.errorMessage })
+      } else {
+        browserHistory.push('/profile')
       }
-    );
+    })
   }
 
-    render() {
-        return (
-      <div className="col-md-4">
-        <form id="frmRegister" role="form" onSubmit={this.onFormSubmit}>
+  render () {
+    return (
+      <div className='col-md-4'>
+        <form id='frmRegister' role='form' onSubmit={this.onFormSubmit}>
           <p>{this.state.message}</p>
           <h2>Register</h2>
-          <div className="form-group">
-            <label htmlFor="txtRegEmail">Email address</label>
-            <input type="email" className="form-control" ref="email" id="txtEmail" placeholder="Enter email"
-              name="email"
+          <div className='form-group'>
+            <label htmlFor='txtRegEmail'>Display Name</label>
+            <input type='text' className='form-control' ref='displayName' id='txtEmail' placeholder='Enter Display Name'
+              name='displayName'
+            />
+            <label htmlFor='txtRegEmail'>Email address</label>
+            <input type='email' className='form-control' ref='email' id='txtEmail' placeholder='Enter email'
+              name='email'
             />
           </div>
-          <div className="form-group">
-            <label htmlFor="txtRegPass">Password</label>
-            <input type="password" className="form-control" ref="password" id="txtPass" placeholder="Password"
-              name="password"
+          <div className='form-group'>
+            <label htmlFor='txtRegPass'>Password</label>
+            <input type='password' className='form-control' ref='password' id='txtPass' placeholder='Password'
+              name='password'
             />
           </div>
-          <button type="submit" className="btn btn-default">Register</button>
+          <button type='submit' className='btn btn-default'>Register</button>
           <br /> <br />
 
-           <a href="#" className="btn btn-block btn-social btn-facebook" onClick={() => {
-               this.loginWithProvider('facebook');
-           }} data-provider="facebook"
-           >Facebook</a>
+          <a href='#' className='btn btn-block btn-social btn-facebook' onClick={() => {
+            this.loginWithProvider('facebook')
+          }} data-provider='facebook'
+          >Facebook</a>
 
-          <a href="#" className="btn btn-block btn-social btn-twitter" onClick={() => {
-              this.loginWithProvider('twitter');
-          }} data-provider="twitter"
+          <a href='#' className='btn btn-block btn-social btn-twitter' onClick={() => {
+            this.loginWithProvider('twitter')
+          }} data-provider='twitter'
           >Twitter</a>
 
-          <a href="#" className="btn btn-block btn-social btn-google" onClick={() => {
-              this.loginWithProvider('google');
-          }} data-provider="twitter"
+          <a href='#' className='btn btn-block btn-social btn-google' onClick={() => {
+            this.loginWithProvider('google')
+          }} data-provider='twitter'
           >Google</a>
 
-           <a href="#" className="btn btn-block btn-social btn-github" onClick={() => {
-               this.loginWithProvider('github');
-           }} data-provider="twitter"
-           >Github</a>
+          <a href='#' className='btn btn-block btn-social btn-github' onClick={() => {
+            this.loginWithProvider('github')
+          }} data-provider='twitter'
+          >Github</a>
 
         </form>
       </div>
-    );
-    }
+    )
+  }
 
 }
 
-function mapDispatchToProps(dispatch) {
-    return bindActionCreators({
-        registerUser,
-    }, dispatch);
+function mapDispatchToProps (dispatch) {
+  return bindActionCreators({
+    registerUser
+  }, dispatch)
 }
 
-function mapStateToProps(state) {
-    return { currentUser: state.currentUser };
+function mapStateToProps (state) {
+  return { currentUser: state.currentUser }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserRegister);
+export default connect(mapStateToProps, mapDispatchToProps)(UserRegister)

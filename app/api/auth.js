@@ -1,45 +1,50 @@
-import {firebaseAuth, getRef, getUid} from './firebase';
+import firebase from 'firebase'
+import {firebaseAuth, getUid} from './firebase'
 
 export let uid = getUid()
 
 var FireBaseAPI = {
   getProvider: (provider) => {
     switch (provider) {
-    case 'email':
-        return new firebase.auth.EmailAuthProvider();
-    case 'facebook':
-        return new firebase.auth.FacebookAuthProvider();
-    case 'github':
-        return new firebase.auth.GithubAuthProvider();
-    case 'google':
-        return new firebase.auth.GoogleAuthProvider();
-    case 'twitter':
-        return new firebase.auth.TwitterAuthProvider();
-    default:
+      case 'email':
+        return new firebase.auth.EmailAuthProvider()
+      case 'facebook':
+        return new firebase.auth.FacebookAuthProvider()
+      case 'github':
+        return new firebase.auth.GithubAuthProvider()
+      case 'google':
+        return new firebase.auth.GoogleAuthProvider()
+      case 'twitter':
+        return new firebase.auth.TwitterAuthProvider()
+      default:
     }
   },
 
   loginWithProvider: (p) => {
-    let provider = FireBaseTools.getProvider(p);
+    let provider = FireBaseAPI.getProvider(p)
     return firebaseAuth.signInWithPopup(provider).then(function (result) {
-        return firebaseAuth.currentUser;
+      return firebaseAuth.currentUser
     }).catch(function (error) {
       return {
         errorCode: error.code,
         errorMessage: error.message
-      };
-    });
+      }
+    })
   },
 
   registerUser: (user) => {
-    return firebaseAuth.createUserWithEmailAndPassword(user.email, user.password).then(user => {
-      return user;
+    return firebaseAuth.createUserWithEmailAndPassword(user.email, user.password).then(dataUser => {
+      return firebaseAuth.currentUser.updateProfile({
+        displayName: user.displayName
+      }).then(user => {
+        return dataUser
+      })
     }).catch(error => {
       return {
         errorCode: error.code,
         errorMessage: error.message
-      };
-    });
+      }
+    })
   },
 
   logoutUser: () => {
@@ -47,36 +52,36 @@ var FireBaseAPI = {
       return {
         success: 1,
         message: 'logout'
-      };
-    });
+      }
+    })
   },
 
   fetchUser: () => {
     return new Promise((resolve, reject) => {
       const unsub = firebaseAuth.onAuthStateChanged(user => {
         if (user) uid = user.uid
-        unsub();
-        resolve(user);
+        unsub()
+        resolve(user)
       }, error => {
-        reject(error);
+        reject(error)
       })
     })
   },
 
   loginUser: (user) => {
     return firebaseAuth.signInWithEmailAndPassword(user.email, user.password).then(user => {
-      return user;
+      return user
     }).catch(error => {
       return {
         errorCode: error.code,
         errorMessage: error.message
       }
-    });
+    })
   },
 
   updateUserProfile: (u) => {
     return firebaseAuth.currentUser.updateProfile(u).then(() => {
-      return firebaseAuth.currentUser;
+      return firebaseAuth.currentUser
     }, error => {
       return {
         errorCode: error.code,
@@ -95,18 +100,18 @@ var FireBaseAPI = {
         errorCode: error.code,
         errorMessage: error.message
       }
-    });
+    })
   },
 
   changePassword: (newPassword) => {
     return firebaseAuth.currentUser.updatePassword(newPassword).then(user => {
-      return user;
+      return user
     }, error => {
       return {
         errorCode: error.code,
         errorMessage: error.message
       }
-    });
+    })
   },
 
   sendEmailVerification: () => {
@@ -119,8 +124,8 @@ var FireBaseAPI = {
         errorCode: error.code,
         errorMessage: error.message
       }
-    });
+    })
   }
-};
+}
 
-export default FireBaseAPI;
+export default FireBaseAPI
