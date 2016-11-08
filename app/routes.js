@@ -22,7 +22,7 @@ export default (
     <Route path='/profile' component={UserProfile} onEnter={requireAuth} />
 
     <Route path='/games' component={Games} onEnter={requireAuth} />
-    <Route path='/board/:key' component={Board} onEnter={requireAuth} />
+    <Route path='/games/:key' component={Board} onEnter={requireAuth} />
   </Route>
 
 )

@@ -1,4 +1,8 @@
-export default function (state = null, action) {
+let initialState = {
+  displayName: ''
+}
+
+export default function (state = initialState, action) {
   switch (action.type) {
     case 'FETCH_FIREBASE_USER':
     case 'LOGOUT_FIREBASE_USER':

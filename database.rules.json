@@ -12,11 +12,6 @@
       "$uid": {
         ".read": "$uid === auth.uid",
         ".write": "$uid === auth.uid",
-        "medications": {
-          "$medication_id": {
-
-          }
-        }
       }
     }
   }

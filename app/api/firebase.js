@@ -26,3 +26,11 @@ export function requireAuth (nextState, replace) {
     })
   }
 }
+
+const FirebaseAPI = {
+  unsubscribe: (path) => {
+    getRef(path).off()
+  }
+}
+
+export default FirebaseAPI

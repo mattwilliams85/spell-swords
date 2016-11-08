@@ -1,5 +1,5 @@
 export function objectToArray (data) {
-  if (!data) return
+  if (!data) return []
   let dataWithKeys = Object.keys(data).map((key) => {
     var obj = data[key]
     obj._key = key
@@ -9,5 +9,6 @@ export function objectToArray (data) {
 }
 
 export function strPossession (string) {
+  if (!string) return
   return string.slice(-1) === 's' ? string + "'" : string + "'s"
 }

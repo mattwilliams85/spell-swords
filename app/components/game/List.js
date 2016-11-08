@@ -1,23 +1,64 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { Link } from 'react-router'
 import { subscribeToGames } from '../../actions/game'
-import { strPossession } from '../../helpers'
+import { unsubscribe } from '../../actions/firebase'
+import ListItem from './ListItem'
 
 class List extends Component {
   componentWillMount () {
     this.props.subscribeToGames()
   }
 
+  componentWillUnmount () {
+    this.props.unsubscribe('games')
+  }
+
+  isPlayer (game) {
+    let players = game.players
+    let player = this.props.player
+
+    if (players.indexOf(player) !== -1) return true
+  }
+
+  filterGames (type) {
+    let games = []
+
+    switch (type) {
+      case 'player':
+        this.props.games.forEach((game) => {
+          if (this.isPlayer(game)) games.push(game)
+        })
+        return games
+
+      default:
+        this.props.games.forEach((game) => {
+          if (!this.isPlayer(game)) games.push(game)
+        })
+        return games
+    }
+  }
+
   render () {
     return (
       <div>
+        <h3>My Games</h3>
+        {
+          !this.filterGames('player').length
+          ? <i>No Games Available</i>
+          : this.filterGames('player').map(game =>
+            <ListItem
+              key={game._key}
+              game={game}
+              isPlayer={this.isPlayer(game)} />
+          )
+        }
+
         <h3>Active Games</h3>
         {
-          !this.props.games
+          !this.filterGames().length
           ? <i>No Games Available</i>
-          : this.props.games.map(game =>
+          : this.filterGames().map(game =>
             <ListItem key={game._key} game={game} />
           )
         }
@@ -26,41 +67,15 @@ class List extends Component {
   }
 }
 
-class ListItem extends Component {
-  constructor (props) {
-    super(props)
-    this.game = this.props.game
-  }
-  render () {
-    return (
-      <div>
-        {
-          this.game.players[1]
-          ? <span>
-            <Link to={`board/${this.game._key}`}>WATCH </Link>
-            {this.game.players[0]}
-            {` VS `}
-            {this.game.players[1]}
-          </span>
-
-          : <span>
-            <Link to={`board/${this.game._key}`}>JOIN </Link>
-            {strPossession(this.game.players[0])} Game
-          </span>
-        }
-      </div>
-    )
-  }
-}
-
 const mapStateToProps = (state) => {
   return {
-    games: state.games.entities
+    games: state.games.entities,
+    player: state.currentUser.displayName
   }
 }
 
 function mapDispatchToProps (dispatch) {
-  return bindActionCreators({subscribeToGames}, dispatch)
+  return bindActionCreators({subscribeToGames, unsubscribe}, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(List)

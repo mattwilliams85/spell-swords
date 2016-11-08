@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { browserHistory } from 'react-router'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { registerUser } from '../../actions/auth'
+import { registerUser, loginWithProvider } from '../../actions/auth'
 
 class UserRegister extends Component {
   constructor (props) {
@@ -37,39 +37,39 @@ class UserRegister extends Component {
           <div className='form-group'>
             <label htmlFor='txtRegEmail'>Display Name</label>
             <input type='text' className='form-control' ref='displayName' id='txtEmail' placeholder='Enter Display Name'
-              name='displayName'
+              name='displayName' required
             />
             <label htmlFor='txtRegEmail'>Email address</label>
             <input type='email' className='form-control' ref='email' id='txtEmail' placeholder='Enter email'
-              name='email'
+              name='email' required
             />
           </div>
           <div className='form-group'>
             <label htmlFor='txtRegPass'>Password</label>
             <input type='password' className='form-control' ref='password' id='txtPass' placeholder='Password'
-              name='password'
+              name='password' required
             />
           </div>
           <button type='submit' className='btn btn-default'>Register</button>
           <br /> <br />
 
           <a href='#' className='btn btn-block btn-social btn-facebook' onClick={() => {
-            this.loginWithProvider('facebook')
+            this.props.loginWithProvider('facebook')
           }} data-provider='facebook'
           >Facebook</a>
 
           <a href='#' className='btn btn-block btn-social btn-twitter' onClick={() => {
-            this.loginWithProvider('twitter')
+            this.props.loginWithProvider('twitter')
           }} data-provider='twitter'
           >Twitter</a>
 
           <a href='#' className='btn btn-block btn-social btn-google' onClick={() => {
-            this.loginWithProvider('google')
+            this.props.loginWithProvider('google')
           }} data-provider='twitter'
           >Google</a>
 
           <a href='#' className='btn btn-block btn-social btn-github' onClick={() => {
-            this.loginWithProvider('github')
+            this.props.loginWithProvider('github')
           }} data-provider='twitter'
           >Github</a>
 
@@ -82,7 +82,8 @@ class UserRegister extends Component {
 
 function mapDispatchToProps (dispatch) {
   return bindActionCreators({
-    registerUser
+    registerUser,
+    loginWithProvider
   }, dispatch)
 }
 

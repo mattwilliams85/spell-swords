@@ -14,7 +14,6 @@ class Create extends Component {
   handleSubmit (event) {
     event.preventDefault()
     this.props.createGame(this.state.name)
-              .then()
   }
 
   handleChange (event) {
