@@ -9,6 +9,12 @@ import UserRegister from './components/user/register'
 import UserProfile from './components/user/profile'
 import ResetPassword from './components/user/reset_password'
 import {requireAuth} from './api/firebase'
+import GameAPI from './api/game'
+
+function clearAndAuth () {
+  requireAuth()
+  GameAPI.clearGames()
+}
 
 export default (
   <Route path='/' component={App}>
@@ -17,6 +23,6 @@ export default (
     <Route path='/register' component={UserRegister} />
     <Route path='/reset' component={ResetPassword} />
     <Route path='/profile' component={UserProfile} onEnter={requireAuth} />
-    <Route path='/games/:key' component={Board} onEnter={requireAuth} />
+    <Route path='/games/:key' component={Board} onEnter={clearAndAuth} />
   </Route>
 )

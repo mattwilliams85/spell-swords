@@ -20,7 +20,7 @@ class Container extends Component {
       <div>
         <Board gameKey={this.props.params.key} isPlayer={isPlayer} />
         <div className='chat-box'>
-          <ChatList />
+          <ChatList isPlayer={isPlayer} />
           { input }
         </div>
       </div>

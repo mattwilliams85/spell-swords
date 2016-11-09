@@ -36,7 +36,8 @@ class ListItem extends Component {
 
   vsText () {
     let player1 = this.props.game.players[0]
-
+    let player2 = this.props.game.players[1]
+    if (this.props.isPlayer && !player2) return <span>Waiting for Player...</span>
     if (this.props.isPlayer) return <span>vs <b>{player1}</b></span>
     return <span><b>{strPossession(player1)}</b> Game</span>
   }

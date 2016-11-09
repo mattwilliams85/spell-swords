@@ -27,7 +27,7 @@ class App extends Component {
         <li className='dropdown'>
           <a href='#' className='dropdown-toggle' data-toggle='dropdown' role='button'
             aria-haspopup='true' aria-expanded='false'>
-            {currentUser.email} <span className='caret' /></a>
+            {currentUser.displayName} <span className='caret' /></a>
           <ul className='dropdown-menu'>
             <li><Link to='/profile'>Profile</Link></li>
             <li role='separator' className='divider' />

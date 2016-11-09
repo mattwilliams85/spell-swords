@@ -15,6 +15,7 @@ class Board extends Component {
   }
 
   render () {
+    if (!this.props.players.length) return (<div />)
     return (
       <div>
         <h3>{strPossession(this.props.players[this.props.playerTurn])} Turn</h3>
@@ -27,6 +28,7 @@ class Board extends Component {
 const mapStateToProps = (state) => {
   let game = state.games.selected
   return {
+    game: game,
     players: game.players,
     playerTurn: game.playerTurn
   }

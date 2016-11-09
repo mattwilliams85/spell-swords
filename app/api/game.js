@@ -2,6 +2,7 @@ import {browserHistory} from 'react-router'
 import {getRef, firebaseAuth} from './firebase'
 import {objectToArray} from '../helpers'
 import {store} from '../index'
+import {clearGames} from '../actions/game'
 
 const path = 'games'
 
@@ -18,6 +19,10 @@ var GameAPI = {
 
   currentPlayer: () => {
     return store.getState().currentUser.displayName
+  },
+
+  clearGames: () => {
+    store.dispatch(clearGames())
   },
 
   // deleteGame: (player) => {
@@ -40,9 +45,9 @@ var GameAPI = {
 
   joinGame: (game) => {
     let player = firebaseAuth.currentUser.displayName
-    if (game.players.length === 2 || GameAPI.isGamePlayer()) return
-    game.players.push(player)
-    return getRef(path + '/' + game._key).update(game).then(
+    if (game.players[1] || GameAPI.isGamePlayer()) return
+    game.players[1] = player
+    getRef(path + '/' + game._key).update(game).then(
       browserHistory.push(path + '/' + game._key)
     )
   },

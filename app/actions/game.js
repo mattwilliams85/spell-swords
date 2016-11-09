@@ -7,6 +7,12 @@ export function deleteGame (key) {
   }
 }
 
+export function clearGames () {
+  return {
+    type: 'CLEAR_GAMES'
+  }
+}
+
 export function joinGame (game) {
   GameAPI.joinGame(game)
   return {
