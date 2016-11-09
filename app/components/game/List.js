@@ -42,7 +42,7 @@ class List extends Component {
   render () {
     return (
       <div>
-        <h3>My Games</h3>
+        <div className='header'>My Games</div>
         {
           !this.filterGames('player').length
           ? <i>No Games Available</i>
@@ -54,7 +54,7 @@ class List extends Component {
           )
         }
 
-        <h3>Active Games</h3>
+        <div className='header'>Active Games</div>
         {
           !this.filterGames().length
           ? <i>No Games Available</i>

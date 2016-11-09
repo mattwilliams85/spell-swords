@@ -26,14 +26,14 @@ class ResetPassword extends Component {
 
   render () {
     return (
-      <div className='col-md-4'>
+      <div >
         <form role='form' onSubmit={this.onFormSubmit}>
           <h4>{this.state.message}</h4>
           <div className='form-group'>
             <label htmlFor='txtEmail'>Email address</label>
             <input type='email' className='form-control' id='txtEmail' ref='email' placeholder='Enter email' name='email' />
           </div>
-          <button type='submit' className='btn btn-default btn-block'>Reset Password</button>
+          <button type='submit' className='btn btn-primary btn-block'>Reset Password</button>
         </form>
       </div>
     )

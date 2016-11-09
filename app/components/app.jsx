@@ -31,7 +31,7 @@ class App extends Component {
           <ul className='dropdown-menu'>
             <li><Link to='/profile'>Profile</Link></li>
             <li role='separator' className='divider' />
-            <li><Link to='/logout' onClick={this.logOut}>Logout</Link></li>
+            <li><Link to='/login' onClick={this.logOut}>Logout</Link></li>
           </ul>
         </li>
       )
@@ -48,21 +48,21 @@ class App extends Component {
       <div>
         <header className='navbar navbar-static-top navbar-inverse' id='top' role='banner'>
           <div className='container'>
-            <div className='navbar-header'>
-              <button className='navbar-toggle collapsed' type='button' data-toggle='collapse' data-target='.bs-navbar-collapse'>
-                <span className='sr-only'>Toggle navigation</span>
-                <span className='icon-bar' />
-                <span className='icon-bar' />
-                <span className='icon-bar' />
-              </button>
-              <Link to='/' className='navbar-brand'>Firebase & Redux boilerplate</Link>
-
+            <div className='navbar-header layout-row layout-align-space-between'>
+              <Link to='/' className='navbar-brand title layout-row layout-align-start-center flex'>
+                <div className='sword-icon' />
+                SPELL SWORDS
+              </Link>
+              <div>
+                <button className='navbar-toggle collapsed' type='button' data-toggle='collapse' data-target='.bs-navbar-collapse'>
+                  <span className='sr-only'>Toggle navigation</span>
+                  <span className='icon-bar' />
+                  <span className='icon-bar' />
+                  <span className='icon-bar' />
+                </button>
+              </div>
             </div>
             <nav className='collapse navbar-collapse bs-navbar-collapse' role='navigation'>
-              <ul className='nav navbar-nav'>
-                <li><Link to='/'> Home</Link></li>
-                <li><Link to='/games'> Games</Link></li>
-              </ul>
               <ul className='nav navbar-nav navbar-right'>
                 { this.renderUserMenu(this.props.currentUser) }
               </ul>
@@ -70,8 +70,10 @@ class App extends Component {
           </div>
         </header>
 
-        <div className='container'>
-          {this.props.children}
+        <div className='container layout-column layout-align-center-center'>
+          <div className='main-wrap'>
+            {this.props.children}
+          </div>
         </div>
       </div>
     )

@@ -41,7 +41,7 @@ class UserLogin extends Component {
 
   render () {
     return (
-      <div className='col-md-4'>
+      <div >
         <form id='frmLogin' role='form' onSubmit={this.onFormSubmit}>
           <p>
             {this.state.message}
@@ -57,7 +57,7 @@ class UserLogin extends Component {
             <input type='password' className='form-control' id='txtPass' ref='password' placeholder='Password'
               name='password' />
           </div>
-          <button type='submit' className='btn btn-default btn-block'>Login</button>
+          <button type='submit' className='btn btn-primary btn-block'>Login</button>
           <br />
           <h5><Link to='/reset'>Forgot password?</Link></h5>
 

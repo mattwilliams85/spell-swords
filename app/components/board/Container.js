@@ -17,7 +17,7 @@ class Container extends Component {
     if (isPlayer) input = <ChatCreate />
 
     return (
-      <div className='container'>
+      <div>
         <Board gameKey={this.props.params.key} isPlayer={isPlayer} />
         <div className='chat-box'>
           <ChatList />

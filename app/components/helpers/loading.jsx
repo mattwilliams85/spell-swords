@@ -2,7 +2,7 @@ import React from 'react'
 
 const Loading = () => {
   return (
-    <div className='col-md-4'>
+    <div >
       Loading ....
     </div>
   )

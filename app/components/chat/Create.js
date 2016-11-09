@@ -29,15 +29,16 @@ class Create extends Component {
   render () {
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSubmit} className='chat'>
           <input
             type='text'
             name='msg'
             value={this.state.msg}
-            onChange={this.handleChange} />
+            onChange={this.handleChange}
+            placeholder='Type a message' />
           <button type='submit'
             className='btn success'>
-            SEND
+            Send
           </button>
         </form>
       </div>

@@ -2,25 +2,33 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 class List extends Component {
-  playerDesignation (player) {
-    return player === this.props.game.players[0]
-    ? 'player1'
-    : 'player2'
+  componentDidUpdate () {
+    let chatbox = document.getElementById('chatbox')
+    chatbox.scrollTop = chatbox.scrollHeight
+  }
+
+  whichPlayer (player) {
+    return player === this.props.player
+    ? 'self'
+    : 'opponent'
   }
 
   render () {
     return (
       <div>
-        <h3>ChatBox</h3>
-        {
-          this.props.chat.map(text =>
-            <div key={text._key}>
-              <span className={this.playerDesignation(text.player)}>{text.player}</span>
-              {': '}
-              {text.msg}
-            </div>
-          )
-        }
+        <h5>Chat</h5>
+        <div className='chatbox' id='chatbox'>
+          {
+            this.props.chat.map(text =>
+              <div key={text._key} className={`${this.whichPlayer(text.player)} layout-row`}>
+                <span className='msg'>
+                  <div className='pointer' />
+                  <span>{text.msg}</span>
+                </span>
+              </div>
+            )
+          }
+        </div>
       </div>
     )
   }
@@ -29,7 +37,8 @@ class List extends Component {
 const mapStateToProps = (state) => {
   return {
     game: state.games.selected,
-    chat: state.games.selected.chat.slice(-10)
+    chat: state.games.selected.chat.slice(-10),
+    player: state.currentUser.displayName
   }
 }
 

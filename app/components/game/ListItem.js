@@ -21,32 +21,34 @@ class ListItem extends Component {
 
     if (this.props.isPlayer) {
       return (
-        <Link to={boardLink}>PLAY </Link>
+        <Link to={boardLink} className='play-btn play'>PLAY</Link>
       )
     } else if (this.props.game.players.length === 1) {
       return (
-        <span className='link' onClick={this.handleClick}>JOIN </span>
+        <span className='play-btn join' onClick={this.handleClick}>JOIN</span>
       )
     } else {
       return (
-        <Link to={boardLink}>WATCH </Link>
+        <Link to={boardLink} className='play-btn watch'>WATCH</Link>
       )
     }
   }
 
   vsText () {
     let player1 = this.props.game.players[0]
-    let player2 = this.props.game.players[1]
 
-    if (player2) return `${player1} VS ${player2}`
-    return `${strPossession(player1)} Game`
+    if (this.props.isPlayer) return <span>vs <b>{player1}</b></span>
+    return <span><b>{strPossession(player1)}</b> Game</span>
   }
 
   render () {
     return (
-      <div>
-        {this.buttonLink()}
-        {this.vsText()}
+      <div className='game-item layout-row layout-align-space-between-center'>
+        <div>
+          {this.buttonLink()}
+          {this.vsText()}
+        </div>
+        <div className='count'>TURN {this.props.game.turnCount || 1}</div>
       </div>
     )
   }

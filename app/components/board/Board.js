@@ -17,7 +17,8 @@ class Board extends Component {
   render () {
     return (
       <div>
-        <h1>{strPossession(this.props.players[this.props.playerTurn])} Turn</h1>
+        <h3>{strPossession(this.props.players[this.props.playerTurn])} Turn</h3>
+        <div className='temp-board' style={{height: '400px', width: '100%', background: '#f50', marginBottom: '15px'}} />
       </div>
     )
   }

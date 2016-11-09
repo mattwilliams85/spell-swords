@@ -3,9 +3,11 @@ import List from './List'
 import Create from './Create'
 
 const Container = () => (
-  <div className='container'>
-    <Create />
-    <List />
+  <div className='layout-column layout-align-center-center'>
+    <div className='lobby'>
+      <Create />
+      <List />
+    </div>
   </div>
 )
 

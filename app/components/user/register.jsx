@@ -30,7 +30,7 @@ class UserRegister extends Component {
 
   render () {
     return (
-      <div className='col-md-4'>
+      <div >
         <form id='frmRegister' role='form' onSubmit={this.onFormSubmit}>
           <p>{this.state.message}</p>
           <h2>Register</h2>
@@ -39,6 +39,8 @@ class UserRegister extends Component {
             <input type='text' className='form-control' ref='displayName' id='txtEmail' placeholder='Enter Display Name'
               name='displayName' required
             />
+          </div>
+          <div className='form-group'>
             <label htmlFor='txtRegEmail'>Email address</label>
             <input type='email' className='form-control' ref='email' id='txtEmail' placeholder='Enter email'
               name='email' required
@@ -50,7 +52,7 @@ class UserRegister extends Component {
               name='password' required
             />
           </div>
-          <button type='submit' className='btn btn-default'>Register</button>
+          <button type='submit' className='btn btn-primary'>Register</button>
           <br /> <br />
 
           <a href='#' className='btn btn-block btn-social btn-facebook' onClick={() => {
