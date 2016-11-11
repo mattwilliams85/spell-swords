@@ -24,9 +24,10 @@ Quick Start
 -----------
 
 ```shell
-$ git clone https://github.com/btomashvili/react-redux-firebase-boilerplate.git
-$ cd react-redux-firebase-boilerplate
+$ git clone https://github.com/mattwilliams85/sellswords.git
+$ cd sellswords
 $ npm install
+$ bower install
 $ npm run dev
 ```
 

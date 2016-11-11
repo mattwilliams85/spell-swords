@@ -29,6 +29,9 @@ coverage
 # Compiled binary addons (http://nodejs.org/api/addons.html)
 build/Release
 
+# ENV-variables
+.env
+
 # Dependency directories
 node_modules
 bower_components
