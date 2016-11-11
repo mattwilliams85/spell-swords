@@ -41,9 +41,9 @@ class UserLogin extends Component {
 
   render () {
     return (
-      <div className='layout-padding'>
+      <div className='layout-padding auth-form'>
         <form id='frmLogin' role='form' onSubmit={this.onFormSubmit}>
-          <p>
+          <p className={ this.state.message ? 'alert alert-danger' : ''}>
             {this.state.message}
           </p>
           <h2>Login</h2>

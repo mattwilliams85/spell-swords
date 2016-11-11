@@ -30,9 +30,9 @@ class UserRegister extends Component {
 
   render () {
     return (
-      <div className='layout-padding'>
+      <div className='layout-padding auth-form'>
         <form id='frmRegister' role='form' onSubmit={this.onFormSubmit}>
-          <p>{this.state.message}</p>
+          <p className='alert alert-danger'>{this.state.message}</p>
           <h2>Register</h2>
           <div className='form-group'>
             <label htmlFor='txtRegEmail'>Display Name</label>

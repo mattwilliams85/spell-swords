@@ -1,17 +1,13 @@
-$red: #e54744;
-$red-lite: #f53d3a;
-
-$blue: #49a2e4;
-
-$green: #3dc190;
-$green-lite: #4dce9e;
-
 .navbar-inverse {
   color: #fff;
 }
 .navbar-brand {
   margin-left: 0 !important;
   color: $red !important;
+}
+
+.alert {
+  font-size: 11pt !important;
 }
 
 .navbar-toggle .icon-bar {

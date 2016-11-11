@@ -1,3 +1,11 @@
+$red: #e54744;
+$red-lite: #f53d3a;
+
+$blue: #49a2e4;
+
+$green: #3dc190;
+$green-lite: #4dce9e;
+
 body {
   font-size: 16px;
   font-family: 'Roboto';
@@ -54,4 +62,8 @@ h1, h2, h3, h4, h5 {
 .board {
   min-height: 770px;
   width: 500px;
+}
+
+.auth-form {
+  max-width: 370px;
 }
