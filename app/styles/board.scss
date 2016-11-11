@@ -1,0 +1,15 @@
+.ss-board {
+
+.temp-board {
+  height: 400px;
+  width: 500px;
+  background: #333;
+  margin-bottom: 15px
+}
+
+.name {
+  color: #ccc;
+  &.active { color: green }
+}
+
+}

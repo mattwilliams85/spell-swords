@@ -47,7 +47,8 @@ class UserProfile extends Component {
             <label htmlFor='displayName'>Display name: </label>
             <input
               type='text' defaultValue={this.props.currentUser.displayName} className='form-control'
-              ref='displayName' id='displayName' placeholder='Display name' name='displayName' />
+              ref='displayName' id='displayName' placeholder='Display name' name='displayName'
+              pattern='.{3,13}' title='3 to 13 characters' required />
           </div>
           <div className='form-group'>
             <label htmlFor='email'>Email: </label>

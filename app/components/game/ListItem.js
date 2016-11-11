@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux'
 import { joinGame } from '../../actions/game'
 import { Link } from 'react-router'
 import { strPossession } from '../../helpers'
+import moment from 'moment'
 
 class ListItem extends Component {
   constructor (props) {
@@ -18,10 +19,14 @@ class ListItem extends Component {
 
   buttonLink () {
     let boardLink = `games/${this.props.game._key}`
+    let turns = this.props.game.turnCount
+    let playTitle
+
+    turns ? playTitle = `TURN ${turns}` : playTitle = 'PLAY'
 
     if (this.props.isPlayer) {
       return (
-        <Link to={boardLink} className='play-btn play'>PLAY</Link>
+        <Link to={boardLink} className='play-btn play'>{playTitle }</Link>
       )
     } else if (this.props.game.players.length === 1) {
       return (
@@ -37,9 +42,24 @@ class ListItem extends Component {
   vsText () {
     let player1 = this.props.game.players[0]
     let player2 = this.props.game.players[1]
-    if (this.props.isPlayer && !player2) return <span>Waiting for Player...</span>
-    if (this.props.isPlayer) return <span>vs <b>{player1}</b></span>
-    return <span><b>{strPossession(player1)}</b> Game</span>
+
+    if (this.props.isPlayer && !player2) {
+      return <span>Waiting for Player...</span>
+    } else if (this.props.isPlayer) {
+      return <span>vs <b>{player1}</b></span>
+    } else if (this.props.game.players.length === 2) {
+      return <span><b>{player1}</b> vs <b>{player2}</b></span>
+    } else {
+      return <span><b>{strPossession(player1)}</b> Game</span>
+    }
+  }
+
+  dateText () {
+    let startedAt = this.props.game.startedAt
+    let startedDate = moment(startedAt).format('MMM D YYYY')
+    let todayDate = moment().format('MMM D YYYY')
+
+    return startedDate === todayDate ? moment(startedAt).format('h:mm a') : startedDate
   }
 
   render () {
@@ -49,7 +69,7 @@ class ListItem extends Component {
           {this.buttonLink()}
           {this.vsText()}
         </div>
-        <div className='count'>TURN {this.props.game.turnCount || 1}</div>
+        <div className='date'>{this.dateText()}</div>
       </div>
     )
   }

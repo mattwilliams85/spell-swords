@@ -1,0 +1,68 @@
+.ss-game {
+
+.lobby {
+  min-height: 500px;
+  .btn {
+    padding: 15px 0 15px 20px;
+    font-size: 13pt;
+    width: 420px;
+    position: relative;
+    margin-top: 10px;
+    i {
+      font-size: 22pt;
+      transform: rotate(135deg);
+      position: absolute;
+      top: 4px;
+      left: 75px;
+    }
+  }
+}
+
+.header {
+  background: #3d829c;
+  color: #fff;
+  padding: 5px 10px;
+  margin: 15px 0;
+}
+
+.game-item {
+  margin: 0 0 10px 0;
+}
+
+.play-btn {
+  cursor: pointer;
+  color: #fff;
+  text-align: center;
+  padding: 4px 0;
+  margin: 0 10px 0 0;
+  width: 75px;
+  display: inline-block;
+  font-weight: 800;
+  transition: .3s;
+  &.play {
+    border: 2px solid #45caca;
+    color: #45caca;
+    &:hover {
+      background: #45caca;
+      color: #fff;
+    }
+  }
+  &.watch {
+    border: 2px solid #ca58ac;
+    color: #ca58ac;
+    &:hover {
+      background: #ca58ac;
+      color: #fff;
+    }
+  }
+  &.join {
+    border: 2px solid #35bd3f;
+    color: #35bd3f;
+    &:hover {
+      background: #35bd3f;
+      color: #fff;
+    }
+  }
+}
+
+}

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import moment from 'moment'
 
 class List extends Component {
   componentDidUpdate () {
@@ -15,18 +16,29 @@ class List extends Component {
     }
   }
 
+  dateText (text) {
+    let startedAt = text
+    let startedDate = moment(startedAt).format('MMM D YYYY')
+    let todayDate = moment().format('MMM D YYYY')
+
+    return startedDate === todayDate ? moment(startedAt).format('h:mm a') : startedDate
+  }
+
   render () {
     return (
-      <div>
+      <div className='ss-chat'>
         <h5>Chat</h5>
         <div className='chatbox' id='chatbox'>
           {
             this.props.chat.map(text =>
-              <div key={text._key} className={`${this.whichPlayer(text.player)} layout-row`}>
+              <div
+                key={text._key}
+                className={`${this.whichPlayer(text.player)} layout-row layout-align-start-end`}>
                 <span className='msg'>
                   <div className='pointer' />
                   <span>{text.msg}</span>
                 </span>
+                <span className='date'>{this.dateText(text.createdAt)}</span>
               </div>
             )
           }
@@ -38,7 +50,6 @@ class List extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    game: state.games.selected,
     chat: state.games.selected.chat.slice(-10),
     players: state.games.selected.players,
     player: state.currentUser.displayName

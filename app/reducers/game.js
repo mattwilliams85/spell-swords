@@ -2,7 +2,8 @@ let initialState = {
   selected: {
     players: [],
     playerTurn: 0,
-    chat: []
+    chat: [],
+    startedAt: null
   },
   entities: []
 }

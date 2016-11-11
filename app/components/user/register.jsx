@@ -30,14 +30,14 @@ class UserRegister extends Component {
 
   render () {
     return (
-      <div >
+      <div className='layout-padding'>
         <form id='frmRegister' role='form' onSubmit={this.onFormSubmit}>
           <p>{this.state.message}</p>
           <h2>Register</h2>
           <div className='form-group'>
             <label htmlFor='txtRegEmail'>Display Name</label>
             <input type='text' className='form-control' ref='displayName' id='txtEmail' placeholder='Enter Display Name'
-              name='displayName' required
+              name='displayName' pattern='.{3,13}' title='3 to 13 characters' required
             />
           </div>
           <div className='form-group'>

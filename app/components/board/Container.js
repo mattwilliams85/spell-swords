@@ -5,21 +5,21 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 class Container extends Component {
-  isGamePlayer () {
+  isPlayer () {
     let game = this.props.game
     let player = this.props.player
     if (game.players.indexOf(player) !== -1) return true
   }
 
   render () {
-    let isPlayer = this.isGamePlayer()
+    let isPlayer = this.isPlayer()
     let input = null
     if (isPlayer) input = <ChatCreate />
 
     return (
-      <div>
+      <div className='board layout-column layout-align-space-between-start'>
         <Board gameKey={this.props.params.key} isPlayer={isPlayer} />
-        <div className='chat-box'>
+        <div className='ss-chat'>
           <ChatList isPlayer={isPlayer} />
           { input }
         </div>

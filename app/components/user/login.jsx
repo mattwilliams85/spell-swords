@@ -34,14 +34,14 @@ class UserLogin extends Component {
       if (data.payload.errorCode) {
         this.setState({ message: data.payload.errorMessage })
       } else {
-        browserHistory.push('/profile')
+        browserHistory.push('/')
       }
     })
   }
 
   render () {
     return (
-      <div >
+      <div className='layout-padding'>
         <form id='frmLogin' role='form' onSubmit={this.onFormSubmit}>
           <p>
             {this.state.message}

@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { subscribeToGame } from '../../actions/game'
 import { bindActionCreators } from 'redux'
-import { strPossession } from '../../helpers'
 import { unsubscribe } from '../../actions/firebase'
 
 class Board extends Component {
@@ -14,12 +13,22 @@ class Board extends Component {
     this.props.unsubscribe('games/' + this.props.gameKey)
   }
 
+  isActive (player) {
+    if (this.props.playerTurn === player) return 'active'
+  }
+
   render () {
     if (!this.props.players.length) return (<div />)
     return (
-      <div>
-        <h3>{strPossession(this.props.players[this.props.playerTurn])} Turn</h3>
-        <div className='temp-board' style={{height: '400px', width: '100%', background: '#f50', marginBottom: '15px'}} />
+      <div className='ss-board layout-column layout-align-space-between-center'>
+        <div>
+          <h5>Player Turn</h5>
+          <div className='layout-row layout-align-space-between-start'>
+            <h3 className={`${this.isActive(0)} name`}>{this.props.players[0]}</h3>
+            <h3 className={`${this.isActive(1)} name`}>{this.props.players[1]}</h3>
+          </div>
+          <div className='temp-board' />
+        </div>
       </div>
     )
   }

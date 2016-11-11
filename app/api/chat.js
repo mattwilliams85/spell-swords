@@ -1,3 +1,4 @@
+import firebase from 'firebase'
 import {getRef, firebaseAuth} from './firebase'
 import GameAPI from './game'
 
@@ -8,13 +9,15 @@ function chatPath (game) {
 var ChatAPI = {
   createText: (msg) => {
     let game = GameAPI.currentGame()
-    let player = firebaseAuth.currentUser
+    let player = GameAPI.currentPlayer()
+    let createdAt = firebase.database.ServerValue.TIMESTAMP
 
     return new Promise((resolve, reject) => {
-      if (GameAPI.isGamePlayer(player)) {
+      if (GameAPI.isGamePlayer(game)) {
         return getRef(chatPath(game)).push({
           msg: msg,
-          player: player.displayName
+          player: player,
+          createdAt: createdAt
         }).then(data => { resolve(data) })
       }
     })

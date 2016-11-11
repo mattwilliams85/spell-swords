@@ -1,0 +1,26 @@
+.navbar-inverse {
+  color: #fff;
+}
+.navbar-brand {
+  margin-left: 0 !important;
+  color: #e54744 !important;
+}
+
+.navbar-toggle .icon-bar {
+  background: #fff;
+}
+
+.btn {
+  border-radius: 0px;
+  color: #fff;
+  transition: background .3s;
+  &:hover {
+    color: #fff;
+  }
+  &.primary {
+    background: #e54744;
+    &:hover {
+      background: #f53d3a;
+    }
+  }
+}

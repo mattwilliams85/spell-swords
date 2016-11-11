@@ -1,3 +1,4 @@
+import firebase from 'firebase'
 import {browserHistory} from 'react-router'
 import {getRef, firebaseAuth} from './firebase'
 import {objectToArray} from '../helpers'
@@ -7,9 +8,10 @@ import {clearGames} from '../actions/game'
 const path = 'games'
 
 var GameAPI = {
-  isGamePlayer () {
-    let game = GameAPI.currentGame()
+  isGamePlayer (game) {
+    if (!game) game = GameAPI.currentGame()
     let player = GameAPI.currentPlayer()
+
     if (game.players.indexOf(player) !== -1) return true
   },
 
@@ -25,18 +27,20 @@ var GameAPI = {
     store.dispatch(clearGames())
   },
 
-  // deleteGame: (player) => {
-    // if (!GameAPI.isGamePlayer(player)) return
-    // return getRef(path).child(game.key).remove()
-  // },
+  deleteGame: (key) => {
+    return getRef(path).child(key).remove()
+  },
 
   createGame: (name) => {
     let player1 = firebaseAuth.currentUser.displayName
+    let startedAt = firebase.database.ServerValue.TIMESTAMP
     let newGame = {
       players: [player1],
       playerTurn: 0,
-      chat: []
+      chat: [],
+      startedAt: startedAt
     }
+
     return getRef(path).push(newGame).then(data => {
       browserHistory.push(path + '/' + data.key)
       return newGame
@@ -44,8 +48,9 @@ var GameAPI = {
   },
 
   joinGame: (game) => {
+    if (game.players[1] || GameAPI.isGamePlayer(game)) return
+
     let player = firebaseAuth.currentUser.displayName
-    if (game.players[1] || GameAPI.isGamePlayer()) return
     game.players[1] = player
     getRef(path + '/' + game._key).update(game).then(
       browserHistory.push(path + '/' + game._key)
