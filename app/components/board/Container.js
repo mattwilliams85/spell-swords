@@ -1,11 +1,24 @@
+import React, { Component } from 'react'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+
 import Board from './Board'
 import BoardButtons from './Buttons'
 import ChatList from '../chat/List'
 import ChatCreate from '../chat/Create'
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import Loading from '../helpers/spinner'
+import { subscribeToGame } from '../../actions/game'
+import { unsubscribe } from '../../actions/firebase'
 
 class Container extends Component {
+  componentWillMount () {
+    this.props.subscribeToGame(this.props.params.key)
+  }
+
+  componentWillUnmount () {
+    this.props.unsubscribe('games/' + this.props.params.key)
+  }
+
   isPlayer () {
     let game = this.props.game
     let user = this.props.user
@@ -16,12 +29,12 @@ class Container extends Component {
   render () {
     let isPlayer = this.isPlayer()
     let input = null
-
     if (isPlayer) input = <ChatCreate />
+    if (!this.props.players[0]) return <Loading className='board' />
 
     return (
       <div className='board layout-column layout-align-space-between-start'>
-        <Board gameKey={this.props.params.key} isPlayer={this.isPlayer()} />
+        <Board isPlayer={this.isPlayer()} />
         <BoardButtons />
         <div className='ss-chat'>
           <ChatList isPlayer={isPlayer} />
@@ -40,4 +53,9 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(Container)
+function mapDispatchToProps (dispatch) {
+  return bindActionCreators({subscribeToGame, unsubscribe}, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Container)
+

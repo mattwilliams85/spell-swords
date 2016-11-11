@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import {fetchUser, updateUser} from '../../actions/auth'
-import Loading from '../helpers/loading'
+import Loading from '../helpers/spinner'
 import ChangePassword from './change_password'
 
 class UserProfile extends Component {

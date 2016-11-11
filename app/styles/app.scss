@@ -23,6 +23,12 @@ h1, h2, h3, h4, h5 {
   -webkit-font-smoothing: initial;
 }
 
+.btn-disabled {
+  pointer-events: none;
+  background: #ccc;
+  border: 1px solid #ccc;
+}
+
 .sword-icon {
   background: url('/img/sword.png') center center / cover;
   height: 30px;

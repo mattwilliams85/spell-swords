@@ -14,12 +14,24 @@
   .button-wrap {
     padding: 20px 0;
 
+    .skip {
+      border: 2px solid $green;
+      color: $green;
+      &:hover {
+        background: $green;
+        color: #fff;
+      }
+    }
+
     &.disabled {
       pointer-events: none;
       .btn {
         background: #ccc;
+        border: 2px solid #ccc;
+        color: #fff;
       }
     }
+
   }
 
 }

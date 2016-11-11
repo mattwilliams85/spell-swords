@@ -1,21 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { subscribeToGame, deleteGame } from '../../actions/game'
+import { deleteGame } from '../../actions/game'
 import { bindActionCreators } from 'redux'
-import { unsubscribe } from '../../actions/firebase'
 
 class Board extends Component {
   constructor (props) {
     super(props)
     this.forfeit = this.forfeit.bind(this)
-  }
-
-  componentWillMount () {
-    this.props.subscribeToGame(this.props.gameKey)
-  }
-
-  componentWillUnmount () {
-    this.props.unsubscribe('games/' + this.props.gameKey)
   }
 
   isActive (player) {
@@ -58,7 +49,7 @@ const mapStateToProps = (state) => {
 }
 
 function mapDispatchToProps (dispatch) {
-  return bindActionCreators({subscribeToGame, unsubscribe, deleteGame}, dispatch)
+  return bindActionCreators({deleteGame}, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Board)

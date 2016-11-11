@@ -14,7 +14,7 @@ class Actions extends Component {
     let players = this.props.players
     let playerTurn = this.props.playerTurn
 
-    if (players[playerTurn] === user) return 'disabled'
+    if (players[playerTurn] !== user) return 'disabled'
   }
 
   skipTurn () {
@@ -25,7 +25,7 @@ class Actions extends Component {
     return (
       <div className='ss-board layout-fill'>
         <div className={`${this.isDisabled()} button-wrap layout-row layout-align-end-center`}>
-          <div className='btn green' onClick={this.skipTurn}>SKIP TURN</div>
+          <div className='btn skip' onClick={this.skipTurn}>SKIP TURN</div>
         </div>
       </div>
     )
