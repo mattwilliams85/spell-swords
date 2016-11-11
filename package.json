@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "./node_modules/.bin/webpack-dev-server --config ./webpack/webpack-dev.config.js --watch --colors",
     "build": "rm -rf dist && ./node_modules/.bin/webpack --config ./webpack/webpack-prod.config.js --colors",
-    "start": "PORT=8080 start ./www.js",
+    "start": "node ./www.js",
     "test": "./node_modules/.bin/eslint app && ./node_modules/.bin/mocha --compilers js:babel-core/register --require ./test/test_helper.js --recursive ./test",
     "test:watch": "npm run test -- --watch",
     "lint": "./node_modules/.bin/eslint app"
@@ -64,5 +64,8 @@
   },
   "standard": {
     "parser": "babel-eslint"
+  },
+  "engines": {
+    "node": "7.0.0"
   }
 }
