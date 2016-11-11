@@ -1,10 +1,15 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { subscribeToGame } from '../../actions/game'
+import { subscribeToGame, deleteGame } from '../../actions/game'
 import { bindActionCreators } from 'redux'
 import { unsubscribe } from '../../actions/firebase'
 
 class Board extends Component {
+  constructor (props) {
+    super(props)
+    this.forfeit = this.forfeit.bind(this)
+  }
+
   componentWillMount () {
     this.props.subscribeToGame(this.props.gameKey)
   }
@@ -17,12 +22,20 @@ class Board extends Component {
     if (this.props.playerTurn === player) return 'active'
   }
 
+  forfeit () {
+    if (window.confirm('DO YOU REALLY WANT TO SURRENDER?')) {
+      this.props.deleteGame(this.props.game.key)
+    }
+  }
+
   render () {
-    if (!this.props.players.length) return (<div />)
     return (
       <div className='ss-board layout-column layout-align-space-between-center'>
         <div>
-          <h5>Player Turn</h5>
+          <div className='layout-row layout-align-space-between'>
+            <h5>Turn {this.props.turnCount}</h5>
+            <i className='mdi mdi-flag' onClick={this.forfeit} />
+          </div>
           <div className='layout-row layout-align-space-between-start'>
             <h3 className={`${this.isActive(0)} name`}>{this.props.players[0]}</h3>
             <h3 className={`${this.isActive(1)} name`}>{this.props.players[1]}</h3>
@@ -39,12 +52,13 @@ const mapStateToProps = (state) => {
   return {
     game: game,
     players: game.players,
-    playerTurn: game.playerTurn
+    playerTurn: game.playerTurn,
+    turnCount: game.turnCount
   }
 }
 
 function mapDispatchToProps (dispatch) {
-  return bindActionCreators({subscribeToGame, unsubscribe}, dispatch)
+  return bindActionCreators({subscribeToGame, unsubscribe, deleteGame}, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Board)

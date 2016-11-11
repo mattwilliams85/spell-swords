@@ -1,9 +1,17 @@
+$red: #e54744;
+$red-lite: #f53d3a;
+
+$blue: #49a2e4;
+
+$green: #3dc190;
+$green-lite: #4dce9e;
+
 .navbar-inverse {
   color: #fff;
 }
 .navbar-brand {
   margin-left: 0 !important;
-  color: #e54744 !important;
+  color: $red !important;
 }
 
 .navbar-toggle .icon-bar {
@@ -17,10 +25,12 @@
   &:hover {
     color: #fff;
   }
-  &.primary {
-    background: #e54744;
-    &:hover {
-      background: #f53d3a;
-    }
+  &.red {
+    background: $red;
+    &:hover { background: $red-lite }
+  }
+  &.green {
+    background: $green;
+    &:hover { background: $green-lite }
   }
 }

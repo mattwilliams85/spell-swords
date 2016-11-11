@@ -1,15 +1,25 @@
 .ss-board {
 
-.temp-board {
-  height: 400px;
-  width: 500px;
-  background: #333;
-  margin-bottom: 15px
-}
+  .temp-board {
+    height: 400px;
+    width: 500px;
+    background: #333;
+  }
 
-.name {
-  color: #ccc;
-  &.active { color: green }
-}
+  .name {
+    color: #ccc;
+    &.active { color: $green }
+  }
+
+  .button-wrap {
+    padding: 20px 0;
+
+    &.disabled {
+      pointer-events: none;
+      .btn {
+        background: #ccc;
+      }
+    }
+  }
 
 }

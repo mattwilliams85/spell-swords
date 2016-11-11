@@ -29,7 +29,8 @@ class Create extends Component {
   render () {
     return (
       <div className='ss-chat'>
-        <form onSubmit={this.handleSubmit} className='chat'>
+
+        <form onSubmit={this.handleSubmit} className='chat' autoComplete='off'>
           <input
             type='text'
             name='msg'

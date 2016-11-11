@@ -39,29 +39,24 @@
   display: inline-block;
   font-weight: 800;
   transition: .3s;
+
   &.play {
     border: 2px solid #45caca;
     color: #45caca;
-    &:hover {
-      background: #45caca;
-      color: #fff;
-    }
+    &:hover { background: #45caca }
   }
   &.watch {
     border: 2px solid #ca58ac;
     color: #ca58ac;
-    &:hover {
-      background: #ca58ac;
-      color: #fff;
-    }
+    &:hover { background: #ca58ac }
   }
   &.join {
-    border: 2px solid #35bd3f;
-    color: #35bd3f;
-    &:hover {
-      background: #35bd3f;
-      color: #fff;
-    }
+    border: 2px solid $green;
+    color: $green;
+    &:hover { background: $green }
+  }
+  &:hover {
+    color: #fff;
   }
 }
 

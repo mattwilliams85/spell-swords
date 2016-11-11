@@ -10,7 +10,7 @@ class List extends Component {
 
   whichPlayer (player) {
     if (this.props.isPlayer) {
-      return player === this.props.player ? 'self' : 'opponent'
+      return player === this.props.user ? 'self' : 'opponent'
     } else {
       return this.props.players[0] === player ? 'self' : 'opponent'
     }
@@ -52,7 +52,7 @@ const mapStateToProps = (state) => {
   return {
     chat: state.games.selected.chat.slice(-10),
     players: state.games.selected.players,
-    player: state.currentUser.displayName
+    user: state.currentUser.displayName
   }
 }
 

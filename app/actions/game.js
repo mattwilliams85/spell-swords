@@ -41,3 +41,11 @@ export function subscribeToGame (key) {
     GameAPI.subscribeToGame(dispatch, type, key)
   }
 }
+
+export function skipTurn () {
+  const request = GameAPI.skipTurn()
+  return {
+    type: 'UPDATE_GAME_SUCCESS',
+    payload: request
+  }
+}

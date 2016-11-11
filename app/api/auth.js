@@ -1,5 +1,5 @@
 import firebase from 'firebase'
-import {firebaseAuth, getUid} from './firebase'
+import { firebaseAuth, getUid } from './firebase'
 
 export let uid = getUid()
 

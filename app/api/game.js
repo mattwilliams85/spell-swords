@@ -1,9 +1,9 @@
-import firebase from 'firebase'
-import {browserHistory} from 'react-router'
-import {getRef, firebaseAuth} from './firebase'
-import {objectToArray} from '../helpers'
-import {store} from '../index'
-import {clearGames} from '../actions/game'
+import Firebase from 'firebase'
+import { browserHistory } from 'react-router'
+import { getRef, firebaseAuth } from './firebase'
+import { objectToArray } from '../helpers'
+import { store } from '../index'
+import { clearGames } from '../actions/game'
 
 const path = 'games'
 
@@ -28,15 +28,18 @@ var GameAPI = {
   },
 
   deleteGame: (key) => {
-    return getRef(path).child(key).remove()
+    getRef(path + '/' + key).remove().then(
+      browserHistory.push('/')
+    )
   },
 
   createGame: (name) => {
     let player1 = firebaseAuth.currentUser.displayName
-    let startedAt = firebase.database.ServerValue.TIMESTAMP
+    let startedAt = Firebase.database.ServerValue.TIMESTAMP
     let newGame = {
       players: [player1],
       playerTurn: 0,
+      turnCount: 0,
       chat: [],
       startedAt: startedAt
     }
@@ -47,11 +50,26 @@ var GameAPI = {
     })
   },
 
+  skipTurn: () => {
+    let game = GameAPI.currentGame()
+    if (game.playerTurn) {
+      game.playerTurn = 0
+      game.turnCount++
+    } else {
+      game.playerTurn = 1
+    }
+
+    return getRef(path + '/' + game.key).update(game).then(data => {
+      return game
+    })
+  },
+
   joinGame: (game) => {
     if (game.players[1] || GameAPI.isGamePlayer(game)) return
 
     let player = firebaseAuth.currentUser.displayName
     game.players[1] = player
+
     getRef(path + '/' + game._key).update(game).then(
       browserHistory.push(path + '/' + game._key)
     )
@@ -68,6 +86,7 @@ var GameAPI = {
 
   subscribeToGame: (dispatch, type, key) => {
     getRef(path + '/' + key).on('value', (snap) => {
+      if (!snap.val()) return
       let results = snap.val()
       results.key = key
       results.chat = objectToArray(results.chat)
