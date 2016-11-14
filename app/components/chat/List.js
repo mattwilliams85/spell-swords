@@ -26,8 +26,10 @@ class List extends Component {
 
   render () {
     return (
-      <div className='ss-chat'>
-        <h5>Chat</h5>
+      <div>
+        <div className='header'>
+          <h4>In-Game Chat</h4>
+        </div>
         <div className='chatbox' id='chatbox'>
           {
             this.props.chat.map(text =>

@@ -28,21 +28,18 @@ class Create extends Component {
 
   render () {
     return (
-      <div className='ss-chat'>
-
-        <form onSubmit={this.handleSubmit} className='chat' autoComplete='off'>
-          <input
-            type='text'
-            name='msg'
-            value={this.state.msg}
-            onChange={this.handleChange}
-            placeholder='Type a message' />
-          <button type='submit'
-            className='btn success'>
-            Send
-          </button>
-        </form>
-      </div>
+      <form onSubmit={this.handleSubmit} className='chat layout-row' autoComplete='off'>
+        <input
+          type='text'
+          name='msg'
+          value={this.state.msg}
+          onChange={this.handleChange}
+          placeholder='Type a message' />
+        <button type='submit'
+          className='btn success'>
+          Send
+        </button>
+      </form>
     )
   }
 }

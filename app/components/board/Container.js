@@ -3,9 +3,6 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 import Board from './Board'
-import BoardButtons from './Buttons'
-import ChatList from '../chat/List'
-import ChatCreate from '../chat/Create'
 import Loading from '../helpers/spinner'
 import { subscribeToGame } from '../../actions/game'
 import { unsubscribe } from '../../actions/firebase'
@@ -27,20 +24,10 @@ class Container extends Component {
   }
 
   render () {
-    let isPlayer = this.isPlayer()
-    let input = null
-    if (isPlayer) input = <ChatCreate />
     if (!this.props.players[0]) return <Loading className='board' />
 
     return (
-      <div className='board layout-column layout-align-space-between-start'>
-        <Board isPlayer={this.isPlayer()} />
-        <BoardButtons />
-        <div className='ss-chat'>
-          <ChatList isPlayer={isPlayer} />
-          { input }
-        </div>
-      </div>
+      <Board isPlayer={this.isPlayer()} />
     )
   }
 }

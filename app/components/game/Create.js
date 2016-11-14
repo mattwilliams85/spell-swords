@@ -26,7 +26,7 @@ class Create extends Component {
         <form onSubmit={this.handleSubmit} >
           <button type='submit'
             className='btn red title'>
-            <i className='mdi mdi-sword' />START NEW GAME!
+            <span><i className='mdi mdi-sword' />START NEW GAME!</span>
           </button>
         </form>
       </div>

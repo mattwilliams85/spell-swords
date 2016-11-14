@@ -3,7 +3,7 @@ import List from './List'
 import Create from './Create'
 
 const Container = () => (
-  <div className='ss-game layout-column layout-align-center-center'>
+  <div className='ss-game'>
     <div className='lobby'>
       <Create />
       <List />

@@ -1,37 +1,54 @@
 .ss-board {
 
-  .temp-board {
-    height: 400px;
-    width: 500px;
-    background: #333;
+.board-wrap {
+  width: 414px;
+  height: 736px;
+  position: relative;
+}
+
+.background {
+  background: #1b2027;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0; left:0;
+  &.layer-1 {
+    background: url('/img/board-overlay.png');
+  }
+}
+
+.name {
+  color: #ccc;
+  &.active { color: $green }
+}
+
+.button-wrap {
+  padding: 20px 0;
+  position: absolute;
+  bottom: 7%;
+  right: 30%;
+
+  .btn {
+    padding: 10px 40px;
   }
 
-  .name {
-    color: #ccc;
-    &.active { color: $green }
-  }
-
-  .button-wrap {
-    padding: 20px 0;
-
-    .skip {
-      border: 2px solid $green;
-      color: $green;
-      &:hover {
-        background: $green;
-        color: #fff;
-      }
+  .skip {
+    border: 2px solid $green;
+    color: $green;
+    &:hover {
+      background: $green;
+      color: #fff;
     }
-
-    &.disabled {
-      pointer-events: none;
-      .btn {
-        background: #ccc;
-        border: 2px solid #ccc;
-        color: #fff;
-      }
-    }
-
   }
+
+  &.disabled {
+    pointer-events: none;
+    .btn {
+      background: #ccc;
+      border: 2px solid #ccc;
+      color: #333;
+    }
+  }
+}
 
 }

@@ -1,20 +1,24 @@
 .ss-game {
 
 .lobby {
-  min-height: 500px;
   .btn {
-    padding: 15px 0 15px 20px;
+    padding: 15px 30px 15px 50px;
+    width: 100%;
     font-size: 13pt;
-    width: 420px;
-    position: relative;
     margin-top: 10px;
+    span {
+      position: relative;
+    }
     i {
       font-size: 22pt;
       transform: rotate(135deg);
       position: absolute;
-      top: 4px;
-      left: 75px;
+      top: -11px;
+      left: -41px;
     }
+  }
+  .date {
+    padding: 0 0 0 15px;
   }
 }
 

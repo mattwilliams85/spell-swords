@@ -1,15 +1,29 @@
 .ss-chat {
-  width: 100%;
+
+.header {
+  background: #3d829c;
+  height: 45px;
+  padding: 12px 0 0 10px;
+}
 
 .chatbox {
-  background: #f5f5f5;
+  background: #323435;
   padding: 10px;
-  height: 200px;
-  width: 100%;
-  border: 1px solid #ccc;
-  border-bottom-width: 0px;
   overflow-y: scroll;
   overflow-wrap: break-word;
+  height: 230px;
+  width: 414px;
+
+  @media (min-width: 960px) {
+    height: 630px;
+    width: 300px;
+  }
+
+}
+
+
+::-webkit-scrollbar {
+    background: #222;
 }
 
 .date {
@@ -69,18 +83,18 @@ form.chat {
   background: #3d829c;
   padding: 13px 10px;
   input {
-    width: 85%;
+    width: 100%;
     border-radius: 5px;
     border: 1px solid #7d868e;
     height: 35px;
     padding: 10px;
+    color: #333;
   }
   button {
     background: none;
     border: none;
     color: #a2c1da;
     font-size: 12pt;
-    width: 15%;
   }
 }
 
