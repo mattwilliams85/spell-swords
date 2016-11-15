@@ -30,9 +30,11 @@ class UserRegister extends Component {
 
   render () {
     return (
-      <div className='layout-padding auth-form'>
+      <div className='auth-form layout-column layout-align-center-center'>
         <form id='frmRegister' role='form' onSubmit={this.onFormSubmit}>
-          <p className='alert alert-danger'>{this.state.message}</p>
+          <p className={this.state.message ? 'alert alert-danger' : ''}>
+            {this.state.message}
+          </p>
           <h2>Register</h2>
           <div className='form-group'>
             <label htmlFor='txtRegEmail'>Display Name</label>
@@ -52,7 +54,7 @@ class UserRegister extends Component {
               name='password' required
             />
           </div>
-          <button type='submit' className='btn btn-primary'>Register</button>
+          <button type='submit' className='btn btn-primary btn-block'>Register</button>
           <br /> <br />
 
           <a href='#' className='btn btn-block btn-social btn-facebook' onClick={() => {

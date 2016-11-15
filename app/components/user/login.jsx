@@ -41,7 +41,7 @@ class UserLogin extends Component {
 
   render () {
     return (
-      <div className='layout-padding auth-form'>
+      <div className='auth-form layout-column layout-align-center-center'>
         <form id='frmLogin' role='form' onSubmit={this.onFormSubmit}>
           <p className={this.state.message ? 'alert alert-danger' : ''}>
             {this.state.message}
@@ -61,7 +61,7 @@ class UserLogin extends Component {
           <br />
           <h5><Link to='/reset'>Forgot password?</Link></h5>
 
-          <h4>Login with</h4>
+          <h4 className='btn-social'>Login with</h4>
           <a href='#' className='btn btn-block btn-social btn-facebook' onClick={() => {
             this.loginWithProvider('facebook')
           }} data-provider='facebook'>Facebook</a>
