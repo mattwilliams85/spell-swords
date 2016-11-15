@@ -43,8 +43,8 @@ jspm_packages
 .vscode
 firebase-debug.log
 
-#
-dist
+# Remove for Heroku
+
 
 misc
 .DS_Store
