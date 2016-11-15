@@ -58,14 +58,23 @@
   left: 15px;
 }
 
+.temp-word {
+  position: absolute;
+  top: 70px;
+  left: 80px;
+  z-index: 99;
+  font-size: 25pt;
+  text-transform: uppercase;
+}
+
 .tile {
   cursor: pointer;
   color: #efefef;
   font-size: 2.3rem;
   transition: .2s;
   position: absolute;
-  height: 53px;
-  width: 53px;
+  height: 62px;
+  width: 62px;
   text-transform: uppercase;
   font-weight: 500;
   border-radius: 10%;
@@ -73,6 +82,16 @@
   background-image: url('/img/tile-blank.png');
   text-align: center;
   user-select: none;
+
+  .hover-box {
+    position: absolute;
+    height: 50px;
+    width: 50px;
+    top: 0; left: 0; right: 0; bottom: 0;
+    margin: auto auto;
+    height: 20px;
+    width: 20px;
+  }
 
   &:hover {
     filter: brightness(90%);
@@ -82,14 +101,14 @@
 
   @for $i from 0 through 7 {
     &.x#{$i} {
-      left: #{($i * 53) + ($i * 2)}px;
+      left: #{($i * 62) + ($i * 2)}px;
       animation: bounce #{($i * .05) + .5}s;
     }
   }
 
   @for $i from 0 through 7 {
     &.y#{$i} {
-      top: #{($i * 53) + ($i * 2)}px;
+      top: #{($i * 62) + ($i * 2)}px;
     }
   }
 
@@ -111,6 +130,10 @@
     span {
       transform: scale(1.5);
     }
+  }
+
+  &.active {
+    background-image: url("/img/tile-blue.png");
   }
   // &.black {
   //   background: url('../tile-black.png');
