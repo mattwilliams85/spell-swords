@@ -29,6 +29,10 @@ h1, h2, h3, h4, h5 {
   margin-top: 0;
 }
 
+.shadow {
+  box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.2);
+}
+
 .title {
   font-family: 'Uncial Antiqua';
   -webkit-font-smoothing: initial;
@@ -49,13 +53,6 @@ h1, h2, h3, h4, h5 {
 
 .main-wrap {
   padding-top: 3vh;
-//   padding: 15px;
-//   background: #fff;
-//   color: #333;
-//   margin-top: 50px;
-//   box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.2);
-//   min-height: 500px;
-//   width: 450px;
 }
 
 .date {

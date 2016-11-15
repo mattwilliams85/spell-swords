@@ -13,6 +13,7 @@
   position: absolute;
   top: 0; left:0;
   &.layer-1 {
+    pointer-events: none;
     background: url('/img/board-overlay.png');
   }
 }
@@ -48,6 +49,109 @@
       border: 2px solid #ccc;
       color: #333;
     }
+  }
+}
+
+.tile-wrap {
+  position: absolute;
+  top: 193px;
+  left: 15px;
+}
+
+.tile {
+  cursor: pointer;
+  color: #efefef;
+  font-size: 2.3rem;
+  transition: .2s;
+  position: absolute;
+  height: 53px;
+  width: 53px;
+  text-transform: uppercase;
+  font-weight: 500;
+  border-radius: 10%;
+  background-size: cover;
+  background-image: url('/img/tile-blank.png');
+  text-align: center;
+  user-select: none;
+
+  &:hover {
+    filter: brightness(90%);
+    transform: perspective(1px) scale(0.9)
+  }
+
+
+  @for $i from 0 through 7 {
+    &.x#{$i} {
+      left: #{($i * 53) + ($i * 2)}px;
+      animation: bounce #{($i * .05) + .5}s;
+    }
+  }
+
+  @for $i from 0 through 7 {
+    &.y#{$i} {
+      top: #{($i * 53) + ($i * 2)}px;
+    }
+  }
+
+  .score {
+    position: absolute;
+    top: 0;
+    right: 6%;
+    font-size: 1.2rem;
+  }
+  .character {
+    line-height: 53px;
+  }
+
+  span {
+    color: #efefef;
+  }
+  &.selected {
+    -webkit-filter: brightness(120%);
+    span {
+      transform: scale(1.5);
+    }
+  }
+  // &.black {
+  //   background: url('../tile-black.png');
+  //   color: #444;
+  // }
+  // &.blue {
+  //   background-image: url("../tile-blue.png");
+  // }
+  // &.orange {
+  //   background-image: url("../tile-yellow.png");
+  // }
+  // &.red {
+  //   background-image: url("../tile-red.png");
+  // }
+  // &.blank {
+  //   background-image: url("../tile-blank.png");
+  //   pointer-events: none;
+  // }
+}
+
+@keyframes bounce {
+  from, 60%, 75%, 90%, 100% {
+    animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+  }
+  0% {
+    opacity: 0;
+    transform: translate3d(0, -1000px, 0);
+  }
+  60% {
+    transform: translate3d(0, 25px, 0);
+  }
+  75% {
+
+    transform: translate3d(0, -10px, 0);
+  }
+  90% {
+    transform: translate3d(0, 5px, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
   }
 }
 

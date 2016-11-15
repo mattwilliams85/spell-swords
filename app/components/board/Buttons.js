@@ -23,10 +23,8 @@ class Actions extends Component {
 
   render () {
     return (
-      <div className='layout-fill'>
-        <div className={`${this.isDisabled()} button-wrap layout-row layout-align-end-center`}>
-          <div className='btn skip' onClick={this.skipTurn}>SKIP TURN</div>
-        </div>
+      <div className={`${this.isDisabled()} button-wrap layout-row layout-align-end-center`}>
+        <div className='btn skip' onClick={this.skipTurn}>SKIP TURN</div>
       </div>
     )
   }
