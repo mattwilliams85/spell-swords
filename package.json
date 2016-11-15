@@ -1,5 +1,5 @@
 {
-  "name": "sell-swords",
+  "name": "spell-swords",
   "version": "1.0.0",
   "description": "Multiplayer Word Game using React / Firebase",
   "main": "index.js",
