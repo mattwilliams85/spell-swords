@@ -1,3 +1,9 @@
+import wordList from 'pf-sowpods/src/dictionary'
+
+export function validateWord (word) {
+  if (wordList.indexOf(word.toUpperCase()) !== -1) return true
+}
+
 export const randomAtoZ = ((lookup) => {
   return function () {
     let random = Math.random() * 100000

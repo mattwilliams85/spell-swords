@@ -26,8 +26,8 @@
 .button-wrap {
   padding: 20px 0;
   position: absolute;
-  bottom: 7%;
-  right: 30%;
+  bottom: 4%;
+  right: 8%;
 
   .btn {
     padding: 10px 40px;
@@ -60,11 +60,14 @@
 
 .temp-word {
   position: absolute;
-  top: 70px;
-  left: 80px;
+  bottom: 25px;
+  left: 25px;
   z-index: 99;
-  font-size: 25pt;
-  text-transform: uppercase;
+  .letters {
+    height: 35pt;
+    font-size: 25pt;
+    text-transform: uppercase;
+  }
 }
 
 .tile {
@@ -85,12 +88,10 @@
 
   .hover-box {
     position: absolute;
-    height: 50px;
-    width: 50px;
+    height: 40px;
+    width: 40px;
     top: 0; left: 0; right: 0; bottom: 0;
     margin: auto auto;
-    height: 20px;
-    width: 20px;
   }
 
   &:hover {
