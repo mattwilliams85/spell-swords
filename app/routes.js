@@ -8,12 +8,12 @@ import UserLogin from './components/user/login'
 import UserRegister from './components/user/register'
 import UserProfile from './components/user/profile'
 import ResetPassword from './components/user/reset_password'
-import {requireAuth} from './api/firebase'
-import GameAPI from './api/game'
+import {requireAuth} from './controllers/firebase'
+import GameCtrl from './controllers/game'
 
 function clearAndAuth () {
   requireAuth()
-  GameAPI.clearGames()
+  GameCtrl.clearGames()
 }
 
 export default (

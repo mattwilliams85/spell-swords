@@ -454,7 +454,7 @@ $layout-breakpoint-lg:     1920px !default;
 }
 
 /*
-* Since Layout API uses ng-cloak to hide the dom elements while layouts are adjusted
+* Since Layout uses ng-cloak to hide the dom elements while layouts are adjusted
 *
 */
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {

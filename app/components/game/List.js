@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
+import ListItem from './ListItem'
+
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { subscribeToGames } from '../../actions/game'
 import { unsubscribe } from '../../actions/firebase'
-import ListItem from './ListItem'
+import { isPlayer } from '../../helpers'
 
 class List extends Component {
   componentWillMount () {
@@ -14,26 +16,20 @@ class List extends Component {
     this.props.unsubscribe('games')
   }
 
-  isPlayer (game) {
-    let players = game.players
-    let player = this.props.player
-
-    if (players.indexOf(player) !== -1) return true
-  }
-
   filterGames (type) {
     let games = []
+    let player = this.props.player
 
     switch (type) {
       case 'player':
         this.props.games.forEach((game) => {
-          if (this.isPlayer(game)) games.push(game)
+          if (isPlayer(game, player)) games.push(game)
         })
         return games
 
       default:
         this.props.games.forEach((game) => {
-          if (!this.isPlayer(game)) games.push(game)
+          if (!isPlayer(game, player)) games.push(game)
         })
         return games
     }
@@ -50,7 +46,7 @@ class List extends Component {
             <ListItem
               key={game._key}
               game={game}
-              isPlayer={this.isPlayer(game)} />
+              isPlayer={isPlayer(game, this.props.player)} />
           )
         }
 

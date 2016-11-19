@@ -18,6 +18,7 @@ class ListItem extends Component {
   }
 
   buttonLink () {
+    let playerKeys = (Object.keys(this.props.game.players))
     let boardLink = `games/${this.props.game._key}`
     let turns = this.props.game.turnCount
     let playTitle
@@ -28,7 +29,7 @@ class ListItem extends Component {
       return (
         <Link to={boardLink} className='play-btn play'>{playTitle }</Link>
       )
-    } else if (this.props.game.players.length === 1) {
+    } else if (playerKeys.length === 1) {
       return (
         <span className='play-btn join' onClick={this.handleClick}>JOIN</span>
       )
@@ -40,14 +41,15 @@ class ListItem extends Component {
   }
 
   vsText () {
-    let player1 = this.props.game.players[0]
-    let player2 = this.props.game.players[1]
+    let playerKeys = (Object.keys(this.props.game.players))
+    let player1 = playerKeys[0]
+    let player2 = playerKeys[1]
 
     if (this.props.isPlayer && !player2) {
       return <span>Waiting for Player...</span>
     } else if (this.props.isPlayer) {
       return <span>vs <b>{player1}</b></span>
-    } else if (this.props.game.players.length === 2) {
+    } else if (playerKeys.length === 2) {
       return <span><b>{player1}</b> vs <b>{player2}</b></span>
     } else {
       return <span><b>{strPossession(player1)}</b> Game</span>

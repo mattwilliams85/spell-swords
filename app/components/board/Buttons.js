@@ -9,21 +9,13 @@ class Actions extends Component {
     this.skipTurn = this.skipTurn.bind(this)
   }
 
-  isDisabled () {
-    let user = this.props.user
-    let players = this.props.players
-    let playerTurn = this.props.playerTurn
-
-    if (players[playerTurn] !== user) return 'disabled'
-  }
-
   skipTurn () {
     this.props.skipTurn()
   }
 
   render () {
     return (
-      <div className={`${this.isDisabled()} button-wrap layout-row layout-align-end-center`}>
+      <div className={'button-wrap layout-row layout-align-end-center'}>
         <div className='btn skip' onClick={this.skipTurn}>SKIP TURN</div>
       </div>
     )

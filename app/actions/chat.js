@@ -1,7 +1,7 @@
-import chatAPI from '../api/chat'
+import chatCtrl from '../controllers/chat'
 
 export function createText (msg, game) {
-  const request = chatAPI.createText(msg, game)
+  const request = chatCtrl.createText(msg, game)
   return {
     type: 'CREATE_TEXT_SUCCESS',
     payload: request

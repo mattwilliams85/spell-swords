@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-
 import Board from './Board'
-import Loading from '../helpers/spinner'
 import ChatList from '../chat/List'
 import ChatCreate from '../chat/Create'
+import Loading from '../helpers/spinner'
+
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { isPlayer } from '../../helpers'
 import { subscribeToGame, deleteGame } from '../../actions/game'
 import { unsubscribe } from '../../actions/firebase'
 
@@ -27,13 +28,6 @@ class Container extends Component {
     if (this.props.playerTurn === player) return 'active'
   }
 
-  isPlayer () {
-    let game = this.props.game
-    let user = this.props.user
-
-    if (game.players.indexOf(user) !== -1) return true
-  }
-
   forfeit () {
     if (window.confirm('DO YOU REALLY WANT TO SURRENDER?')) {
       this.props.deleteGame(this.props.game.key)
@@ -41,10 +35,11 @@ class Container extends Component {
   }
 
   render () {
-    let isPlayer = this.isPlayer()
+    let playerKeys = (Object.keys(this.props.game.players))
+    let validPlayer = isPlayer(this.props.game, this.props.user)
     let input = null
-    if (isPlayer) input = <ChatCreate />
-    if (!this.props.players[0]) return <Loading className='board' />
+    if (validPlayer) input = <ChatCreate />
+    if (!Object.keys(this.props.players).length) return <Loading className='board' />
 
     return (
       <div className='ss-board'>
@@ -54,15 +49,15 @@ class Container extends Component {
         </div>
 
         <div className='layout-row'>
-          <h3 className={`${this.isActive(0)} name`}>{this.props.players[0]}</h3>
+          <h3 className={`${this.isActive(0)} name`}>{playerKeys[0]}</h3>
           &nbsp;&nbsp; VS &nbsp;&nbsp;
-          <h3 className={`${this.isActive(1)} name`}>{this.props.players[1]}</h3>
+          <h3 className={`${this.isActive(1)} name`}>{playerKeys[1] || 'Waiting for Player..'}</h3>
         </div>
 
         <div className='layout-column layout-gt-sm-row shadow'>
-          <Board />
+          <Board user={this.props.user} />
           <div className='ss-chat'>
-            <ChatList isPlayer={isPlayer} />
+            <ChatList isPlayer={validPlayer} />
             { input }
           </div>
         </div>

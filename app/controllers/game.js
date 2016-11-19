@@ -1,4 +1,6 @@
 import Firebase from 'firebase'
+import TilesCtrl from './tiles'
+
 import { browserHistory } from 'react-router'
 import { getRef, firebaseAuth } from './firebase'
 import { objectToArray } from '../helpers'
@@ -7,12 +9,13 @@ import { clearGames } from '../actions/game'
 
 const path = 'games'
 
-var GameAPI = {
+const GameCtrl = {
   isGamePlayer (game) {
-    if (!game) game = GameAPI.currentGame()
-    let player = GameAPI.currentPlayer()
-
-    if (game.players.indexOf(player) !== -1) return true
+    if (!game) game = GameCtrl.currentGame()
+    let user = firebaseAuth.currentUser
+    let gamePlayer = game.players[user.displayName]
+    if (!gamePlayer) return
+    if (gamePlayer.uid === user.uid) return true
   },
 
   currentGame: () => {
@@ -34,14 +37,23 @@ var GameAPI = {
   },
 
   createGame: (name) => {
-    let player1 = firebaseAuth.currentUser.displayName
+    let user = firebaseAuth.currentUser
     let startedAt = Firebase.database.ServerValue.TIMESTAMP
+    let tiles = TilesCtrl.generateTiles()
+
+    let players = {}
+    players[user.displayName] = {
+      score: 0,
+      uid: user.uid
+    }
+
     let newGame = {
-      players: [player1],
+      players: players,
       playerTurn: 0,
-      turnCount: 0,
+      turnCount: 1,
       chat: [],
-      startedAt: startedAt
+      startedAt: startedAt,
+      tiles: tiles
     }
 
     return getRef(path).push(newGame).then(data => {
@@ -50,25 +62,42 @@ var GameAPI = {
     })
   },
 
-  skipTurn: () => {
-    let game = GameAPI.currentGame()
+  playWord: (word, tally) => {
+    if (!GameCtrl.isGamePlayer(game)) return
+    let game = GameCtrl.currentGame()
+    let player = GameCtrl.currentPlayer()
+
+    game.lastWord = word
+    game.players[player].score += tally
+
+    return getRef(path + '/' + game.key).update(game).then(data => {
+      return GameCtrl.nextTurn(game)
+    })
+  },
+
+  nextTurn: (currentGame) => {
+    let game = currentGame || GameCtrl.currentGame()
     if (game.playerTurn) {
       game.playerTurn = 0
       game.turnCount++
     } else {
       game.playerTurn = 1
     }
-
+    let tiles = TilesCtrl.generateTiles()
+    game.tiles = tiles
     return getRef(path + '/' + game.key).update(game).then(data => {
       return game
     })
   },
 
   joinGame: (game) => {
-    if (game.players[1] || GameAPI.isGamePlayer(game)) return
+    if (Object.keys(game.players)[1] || GameCtrl.isGamePlayer(game)) return
 
-    let player = firebaseAuth.currentUser.displayName
-    game.players[1] = player
+    let user = firebaseAuth.currentUser
+    game.players[user.displayName] = {
+      score: 0,
+      uid: user.uid
+    }
 
     getRef(path + '/' + game._key).update(game).then(
       browserHistory.push(path + '/' + game._key)
@@ -98,4 +127,4 @@ var GameAPI = {
   }
 }
 
-export default GameAPI
+export default GameCtrl

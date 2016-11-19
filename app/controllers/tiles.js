@@ -1,47 +1,37 @@
 import wordList from 'pf-sowpods/src/dictionary'
 
-export function validateWord (word) {
-  if (wordList.indexOf(word.toUpperCase()) !== -1) return true
-}
+const TilesCtrl = {
+  validateWord (word) {
+    if (wordList.indexOf(word.toUpperCase()) !== -1) return true
+  },
 
-export const randomAtoZ = ((lookup) => {
-  return function () {
+  generateTiles () {
+    let tiles = []
+    for (var x = 0; x < 6; x++) {
+      for (var y = 0; y < 6; y++) {
+        let letter = TilesCtrl.randomAtoZ()
+        tiles.push({
+          x: x,
+          y: y,
+          character: letter.character,
+          score: letter.score,
+          key: `x${x}-y${y}`
+        })
+      }
+    }
+    return tiles
+  },
+
+  randomAtoZ () {
     let random = Math.random() * 100000
     let letter
-    for (letter in lookup) {
-      if (random < lookup[letter]) {
+    for (letter in letterFreq) {
+      if (random < letterFreq[letter]) {
         return letters[letter]
       }
     }
   }
-})({
-  0: 8167,
-  1: 9659,
-  2: 12441,
-  3: 16694,
-  4: 29396,
-  5: 31624,
-  6: 33639,
-  7: 39733,
-  8: 46699,
-  9: 46852,
-  10: 47624,
-  11: 51649,
-  12: 54055,
-  13: 60804,
-  14: 68311,
-  15: 70240,
-  16: 70335,
-  17: 76322,
-  18: 82649,
-  19: 91705,
-  20: 94463,
-  21: 95441,
-  22: 97801,
-  23: 97951,
-  24: 99925,
-  25: 100000
-})
+}
 
 const letters = [
   {character: 'a', score: 1},
@@ -71,3 +61,34 @@ const letters = [
   {character: 'y', score: 4},
   {character: 'z', score: 10}
 ]
+
+const letterFreq = {
+  0: 8167,
+  1: 9659,
+  2: 12441,
+  3: 16694,
+  4: 29396,
+  5: 31624,
+  6: 33639,
+  7: 39733,
+  8: 46699,
+  9: 46852,
+  10: 47624,
+  11: 51649,
+  12: 54055,
+  13: 60804,
+  14: 68311,
+  15: 70240,
+  16: 70335,
+  17: 76322,
+  18: 82649,
+  19: 91705,
+  20: 94463,
+  21: 95441,
+  22: 97801,
+  23: 97951,
+  24: 99925,
+  25: 100000
+}
+
+export default TilesCtrl

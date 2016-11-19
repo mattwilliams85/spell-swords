@@ -1,9 +1,34 @@
 .ss-board {
-
+* {
+  user-select: none;
+}
 .board-wrap {
   width: 414px;
   height: 736px;
   position: relative;
+
+  &.disabled {
+    pointer-events: none;
+    .btn {
+      background: #ccc;
+      border: 2px solid #ccc;
+      color: #333;
+    }
+    .tile {
+      opacity: 0.7;
+    }
+    .character-wrap .player-1 {
+      filter: brightness(70%);
+    }
+    .character-wrap .player-2 {
+      filter: brightness(100%);
+    }
+  }
+  &.single {
+    .character.player-2 {
+      display: none;
+    }
+  }
 }
 
 .background {
@@ -14,7 +39,36 @@
   top: 0; left:0;
   &.layer-1 {
     pointer-events: none;
-    background: url('/img/board-overlay.png');
+    background: url('/img/board-overlay2.png');
+  }
+  &.layer-2 {
+    pointer-events: none;
+    background: url('/img/bg-1.jpg') no-repeat;
+  }
+}
+
+.character-wrap {
+  position: absolute;
+  height: 100px;
+  width: 290px;
+  top: 97px;
+  left: 38px;
+  .character {
+    height: 120px;
+    width: 156px;
+    position: absolute;
+    bottom: 0;
+    z-index: 1;
+    transition: .2s;
+  }
+  .player-1 {
+    background: url('/img/player1.png');
+    filter: brightness(100%);
+  }
+  .player-2 {
+    background: url('/img/player2.png');
+    left: 190px;
+    filter: brightness(70%);
   }
 }
 
@@ -24,10 +78,10 @@
 }
 
 .button-wrap {
-  padding: 20px 0;
+  display: NONE;
   position: absolute;
-  bottom: 4%;
-  right: 8%;
+  bottom: -60px;
+  left: 0;
 
   .btn {
     padding: 10px 40px;
@@ -41,32 +95,67 @@
       color: #fff;
     }
   }
+}
 
-  &.disabled {
-    pointer-events: none;
-    .btn {
-      background: #ccc;
-      border: 2px solid #ccc;
-      color: #333;
-    }
+.timer-wrap {
+  position: absolute;
+  left: 194px;
+  top: 2px;
+  z-index: 1;
+  font-weight: 800;
+  font-size: 11pt;
+  .player-score {
+    position: absolute;
+  }
+  .p1 {
+    position: absolute;
+    left: -60px;
+    color: $blue;
+  }
+  .p2 {
+    right: -60px;
+    color: $red;
   }
 }
 
-.tile-wrap {
+.turn-msg {
   position: absolute;
-  top: 193px;
-  left: 15px;
+  top: 220px;
+  left: 141px;
+  z-index: 1;
+  font-size: 10pt;
+  color: #4f331b;
+  width: 134px;
+  text-align: center;
 }
 
-.temp-word {
+.tile-wrap {
+  cursor: pointer;
   position: absolute;
-  bottom: 25px;
-  left: 25px;
+  top: 258px;
+  left: 31px;
+}
+
+.letters-wrap {
+  position: absolute;
+  bottom: 28px;
+  left: 0;
   z-index: 99;
+  height: 126px;
+  width: 100%;
+
   .letters {
-    height: 35pt;
-    font-size: 25pt;
+    font-size: 35pt;
     text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-family: 'Rakkas';
+  }
+  .points {
+    position: absolute;
+    right: 27px;
+    bottom: 28;
+    font-size: 15pt;
+    color: #11a0dc;
   }
 }
 
@@ -76,8 +165,8 @@
   font-size: 2.3rem;
   transition: .2s;
   position: absolute;
-  height: 62px;
-  width: 62px;
+  height: 57px;
+  width: 57px;
   text-transform: uppercase;
   font-weight: 500;
   border-radius: 10%;
@@ -102,14 +191,14 @@
 
   @for $i from 0 through 7 {
     &.x#{$i} {
-      left: #{($i * 62) + ($i * 2)}px;
+      left: #{($i * 57) + ($i * 2)}px;
       animation: bounce #{($i * .05) + .5}s;
     }
   }
 
   @for $i from 0 through 7 {
     &.y#{$i} {
-      top: #{($i * 62) + ($i * 2)}px;
+      top: #{($i * 57) + ($i * 2)}px;
     }
   }
 

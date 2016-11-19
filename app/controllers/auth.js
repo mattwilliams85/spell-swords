@@ -3,7 +3,7 @@ import { firebaseAuth, getUid } from './firebase'
 
 export let uid = getUid()
 
-var AuthAPI = {
+var AuthCtrl = {
   getProvider: (provider) => {
     switch (provider) {
       case 'email':
@@ -21,7 +21,7 @@ var AuthAPI = {
   },
 
   loginWithProvider: (p) => {
-    let provider = AuthAPI.getProvider(p)
+    let provider = AuthCtrl.getProvider(p)
     return firebaseAuth.signInWithPopup(provider).then(function (result) {
       return firebaseAuth.currentUser
     }).catch(function (error) {
@@ -128,4 +128,4 @@ var AuthAPI = {
   }
 }
 
-export default AuthAPI
+export default AuthCtrl

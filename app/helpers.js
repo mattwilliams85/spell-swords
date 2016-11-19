@@ -12,3 +12,7 @@ export function strPossession (string) {
   if (!string) return
   return string.slice(-1) === 's' ? string + "'" : string + "'s"
 }
+
+export function isPlayer (game, player) {
+  if (player in game.players) return true
+}
