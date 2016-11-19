@@ -43,15 +43,14 @@ class Container extends Component {
 
     return (
       <div className='ss-board'>
+        <Test />
         <div className='layout-row layout-align-space-between'>
-          <h5>Turn {this.props.turnCount}</h5>
+          <div className='layout-row'>
+            <h3 className={`${this.isActive(0)} name`}>{playerKeys[0]}</h3>
+            &nbsp;&nbsp; VS &nbsp;&nbsp;
+            <h3 className={`${this.isActive(1)} name`}>{playerKeys[1] || 'Waiting for Player..'}</h3>
+          </div>
           <i className='mdi mdi-flag' onClick={this.forfeit} />
-        </div>
-
-        <div className='layout-row'>
-          <h3 className={`${this.isActive(0)} name`}>{playerKeys[0]}</h3>
-          &nbsp;&nbsp; VS &nbsp;&nbsp;
-          <h3 className={`${this.isActive(1)} name`}>{playerKeys[1] || 'Waiting for Player..'}</h3>
         </div>
 
         <div className='layout-column layout-gt-sm-row shadow'>

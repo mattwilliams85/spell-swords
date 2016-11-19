@@ -26,6 +26,12 @@ const GameCtrl = {
     return store.getState().currentUser.displayName
   },
 
+  opponent: (game, player) => {
+    let array = Object.keys(game.players)
+    if (array.indexOf(player) === 0) return array[1]
+    return array[0]
+  },
+
   clearGames: () => {
     store.dispatch(clearGames())
   },
@@ -44,7 +50,8 @@ const GameCtrl = {
     let players = {}
     players[user.displayName] = {
       score: 0,
-      uid: user.uid
+      uid: user.uid,
+      life: 100
     }
 
     let newGame = {
@@ -66,9 +73,11 @@ const GameCtrl = {
     if (!GameCtrl.isGamePlayer(game)) return
     let game = GameCtrl.currentGame()
     let player = GameCtrl.currentPlayer()
+    let opponent = GameCtrl.opponent(game, player)
 
     game.lastWord = word
-    game.players[player].score += tally
+    game.players[opponent].life -= tally
+    if (game.players[opponent].life <= 0) game.winner = player
 
     return getRef(path + '/' + game.key).update(game).then(data => {
       return GameCtrl.nextTurn(game)
@@ -96,7 +105,8 @@ const GameCtrl = {
     let user = firebaseAuth.currentUser
     game.players[user.displayName] = {
       score: 0,
-      uid: user.uid
+      uid: user.uid,
+      life: 100
     }
 
     getRef(path + '/' + game._key).update(game).then(

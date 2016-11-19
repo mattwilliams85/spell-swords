@@ -31,6 +31,16 @@
   }
 }
 
+.game-over {
+  z-index: 99;
+  height: 100%;
+  width: 100%;
+  position: relative;
+  text-align: center;
+  background: rgba(50,40,30,0.7);
+  transition: .3s
+}
+
 .background {
   background: #1b2027;
   height: 100%;
@@ -78,43 +88,38 @@
 }
 
 .button-wrap {
-  display: NONE;
   position: absolute;
-  bottom: -60px;
-  left: 0;
-
-  .btn {
-    padding: 10px 40px;
-  }
-
-  .skip {
-    border: 2px solid $green;
-    color: $green;
-    &:hover {
-      background: $green;
-      color: #fff;
-    }
-  }
+  bottom: 11px;
+  left: 111px;
+  height: 45px;
+  width: 194px;
+  z-index: 99;
 }
 
-.timer-wrap {
+.turn-wrap {
   position: absolute;
-  left: 194px;
-  top: 2px;
+  left: 172px;
+  top: 3px;
   z-index: 1;
   font-weight: 800;
-  font-size: 11pt;
-  .player-score {
+  font-size: 10pt;
+  width: 71px;
+  text-align: center;
+  .player-life {
     position: absolute;
+    text-align: center;
+    width: 76px;
+    span {
+      font-size: 8pt;
+    }
   }
   .p1 {
-    position: absolute;
-    left: -60px;
-    color: $blue;
+    left: -76px;
+    color: #49a2e4;
   }
   .p2 {
-    right: -60px;
-    color: $red;
+    right: -76px;
+    color: #e54744;
   }
 }
 
@@ -268,4 +273,20 @@
   }
 }
 
+}
+
+.demo0 {
+  border-radius: 4px;
+  background-color: rgb(240, 240, 232);
+  position: relative;
+  margin: 5px 3px 10px;
+  width: 450px;
+  height: 50px;
+}
+.demo0-block {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  border-radius: 4px;
+  background-color: rgb(130, 181, 198);
 }

@@ -1,3 +1,4 @@
+/* global alert */
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { skipTurn } from '../../actions/game'
@@ -7,16 +8,24 @@ class Actions extends Component {
   constructor (props) {
     super(props)
     this.skipTurn = this.skipTurn.bind(this)
+    this.handleClick = this.handleClick.bind(this)
   }
 
   skipTurn () {
     this.props.skipTurn()
   }
 
+  handleClick () {
+    console.log('wu')
+    alert('Wished these sweet looking buttons did something? Dont worry! The game is still a work in progress, check back soon for future updates.')
+  }
+
   render () {
     return (
-      <div className={'button-wrap layout-row layout-align-end-center'}>
-        <div className='btn skip' onClick={this.skipTurn}>SKIP TURN</div>
+      <div className={'button-wrap layout-row layout-align-end-center'} onClick={this.handleClick}>
+        <div />
+        <div />
+        <div />
       </div>
     )
   }

@@ -25,7 +25,7 @@ class ListItem extends Component {
 
     turns ? playTitle = `TURN ${turns}` : playTitle = 'PLAY'
 
-    if (this.props.isPlayer) {
+    if (this.props.isPlayer && !this.props.game.winner) {
       return (
         <Link to={boardLink} className='play-btn play'>{playTitle }</Link>
       )
@@ -47,6 +47,8 @@ class ListItem extends Component {
 
     if (this.props.isPlayer && !player2) {
       return <span>Waiting for Player...</span>
+    } else if (this.props.game.winner) {
+      return <span>{this.props.game.winner} Won!</span>
     } else if (this.props.isPlayer) {
       return <span>vs <b>{player1}</b></span>
     } else if (playerKeys.length === 2) {
