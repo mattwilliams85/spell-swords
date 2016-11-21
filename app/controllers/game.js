@@ -60,7 +60,8 @@ const GameCtrl = {
       turnCount: 1,
       chat: [],
       startedAt: startedAt,
-      tiles: tiles
+      tiles: tiles,
+      activeTiles: {clear: true}
     }
 
     return getRef(path).push(newGame).then(data => {
@@ -77,12 +78,31 @@ const GameCtrl = {
 
     game.lastWord = word
     game.players[opponent].life -= tally
-    if (game.players[opponent].life <= 0) game.winner = player
-
     game.tiles = TilesCtrl.replaceTiles(tiles, game.tiles)
+    game.activeTiles = {clear: true}
+    if (game.players[opponent].life <= 0) game.winner = player
 
     return getRef(path + '/' + game.key).update(game).then(data => {
       return GameCtrl.nextTurn(game)
+    })
+  },
+
+  clearActiveTiles: () => {
+    let game = GameCtrl.currentGame()
+    game.activeTiles = {clear: true}
+
+    return getRef(path + '/' + game.key).update(game).then(data => {
+      return game
+    })
+  },
+
+  addActiveTile: (tile) => {
+    let game = GameCtrl.currentGame()
+    if (!game.activeTiles) game.activeTiles = {}
+    game.activeTiles[tile.id] = tile
+
+    return getRef(path + '/' + game.key).update(game).then(data => {
+      return game
     })
   },
 

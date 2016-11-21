@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { Motion, spring } from 'react-motion';
+import { Motion, spring } from 'react-motion'
 
 import BoardButtons from './Buttons'
 import Layers from './Layers'
 
 import TilesCtrl from '../../controllers/tiles'
-import { playWord } from '../../actions/game'
+import { playWord, addActiveTile, clearActiveTiles } from '../../actions/game'
 import { strPossession } from '../../helpers'
 
 class Board extends Component {
@@ -30,7 +30,7 @@ class Board extends Component {
   componentDidMount () {
     window.addEventListener('mouseup', this.handleMouseUp)
     setTimeout(() => {
-      {this.setState({start: false})}
+      this.setState({start: false})
     }, 800)
   }
 
@@ -40,10 +40,12 @@ class Board extends Component {
   }
 
   componentWillReceiveProps (nextProps, nextState) {
-    this.setState({updating: true})
-    setTimeout(() => {
-      {this.setState({updating: false})}
-    }, 750)
+    if (this.props.playerTurn !== nextProps.playerTurn) {
+      this.setState({updating: true})
+      setTimeout(() => {
+        this.setState({updating: false})
+      }, 750)
+    }
   }
 
   getScore () {
@@ -66,10 +68,12 @@ class Board extends Component {
 
   handleMouseUp () {
     let spelledWord = this.state.word.join('')
+
     if (TilesCtrl.validateWord(spelledWord) && !this.isDisabled()) {
       this.setState({updating: true})
       this.props.playWord(spelledWord, this.state.activeTiles, this.state.tally)
     } else {
+      this.props.clearActiveTiles()
       this.setState({wrong: true})
     }
     setTimeout(() => {
@@ -107,6 +111,7 @@ class Board extends Component {
   }
 
   pushTile (tile) {
+    this.props.addActiveTile(tile)
     this.addToActiveTiles(tile)
     this.addToWord(tile.character)
     this.addToTally(tile.score)
@@ -133,6 +138,8 @@ class Board extends Component {
     let name = ''
     if (tile.shifted && this.state.updating) name += ` shifted-${tile.shifted}`
     if (this.state.activeTiles[tile.id] && !this.state.updating) name += ' active'
+    if (this.state.activeTiles[tile.id] && this.state.wrong) name += ' wrong'
+    if (this.props.activeTiles[tile.id] && !this.state.updating) name += ' opponent-active'
     if (this.state.start) name += ' start'
     return name
   }
@@ -202,8 +209,8 @@ class Board extends Component {
                     onMouseDown={this.handleMouseDown.bind(this, tile)}
                     style={{
                       WebkitTransform: `translate3d(${x}px, 0, 0)`,
-                      transform: `translate3d(${x}px, 0, 0)`,
-                     }}>
+                      transform: `translate3d(${x}px, 0, 0)`
+                    }}>
                     <div
                       className='hover-box'
                       onMouseOver={this.handleMouseOver.bind(this, tile)}
@@ -237,12 +244,13 @@ const mapStateToProps = (state) => {
     tally: game.tally,
     winner: game.winner,
     tiles: game.tiles,
+    activeTiles: game.activeTiles,
     tileArray: Object.keys(game.tiles).map(function (key) { return game.tiles[key] })
   }
 }
 
 function mapDispatchToProps (dispatch) {
-  return bindActionCreators({playWord}, dispatch)
+  return bindActionCreators({playWord, addActiveTile, clearActiveTiles}, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Board)

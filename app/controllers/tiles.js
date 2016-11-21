@@ -2,6 +2,8 @@ import wordList from 'pf-sowpods/src/dictionary'
 
 const TilesCtrl = {
   validateWord (word) {
+    // 267751 WORDS
+    if (word.length < 2) return
     if (wordList.indexOf(word.toUpperCase()) !== -1) return true
   },
 
@@ -9,7 +11,6 @@ const TilesCtrl = {
     let tiles = []
     for (var x = 0; x < 6; x++) {
       for (var y = 0; y < 6; y++) {
-        let letter = TilesCtrl.randomAtoZ()
         tiles[`x${x}-y${y}`] = TilesCtrl.newTile(x, y)
       }
     }
@@ -30,7 +31,7 @@ const TilesCtrl = {
     return tile
   },
 
-  replaceTiles(played, tiles) {
+  replaceTiles (played, tiles) {
     for (let key in tiles) {
       tiles[key].shifted = 0
     }
@@ -45,7 +46,7 @@ const TilesCtrl = {
       let x = played[key].x
       let y = played[key].y
 
-      for (let i = y; i >= 0; i --) {
+      for (let i = y; i >= 0; i--) {
         let pos = `x${x}-y${i}`
         let abovePos = `x${x}-y${i - 1}`
 

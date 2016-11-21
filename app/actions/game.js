@@ -57,3 +57,19 @@ export function playWord (word, tiles, tally) {
     payload: request
   }
 }
+
+export function addActiveTile (word, tiles, tally) {
+  const request = GameCtrl.addActiveTile(word, tiles, tally)
+  return {
+    type: 'UPDATE_GAME_SUCCESS',
+    payload: request
+  }
+}
+
+export function clearActiveTiles () {
+  const request = GameCtrl.clearActiveTiles()
+  return {
+    type: 'UPDATE_GAME_SUCCESS',
+    payload: request
+  }
+}

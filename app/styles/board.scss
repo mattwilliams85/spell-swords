@@ -20,6 +20,9 @@
     .character-wrap .player-2 {
       filter: brightness(100%);
     }
+    .tile-wrap {
+      opacity: 0.9;
+    }
   }
   &.single {
     .character.player-2 {
@@ -174,6 +177,7 @@
   background-image: url('/img/tile-blank.png');
   text-align: center;
   user-select: none;
+  transition: background-image .25s;
 
   .hover-box {
     position: absolute;
@@ -183,7 +187,8 @@
     margin: auto auto;
   }
 
-  &:hover:not(.active) {
+  &:hover:not(.active):not(.wrong) {
+    transition: .25s;
     filter: brightness(90%);
     transform: perspective(1px) scale(0.9) !important;
   }
