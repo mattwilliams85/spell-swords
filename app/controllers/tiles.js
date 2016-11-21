@@ -10,13 +10,53 @@ const TilesCtrl = {
     for (var x = 0; x < 6; x++) {
       for (var y = 0; y < 6; y++) {
         let letter = TilesCtrl.randomAtoZ()
-        tiles.push({
-          x: x,
-          y: y,
-          character: letter.character,
-          score: letter.score,
-          key: `x${x}-y${y}`
-        })
+        tiles[`x${x}-y${y}`] = TilesCtrl.newTile(x, y)
+      }
+    }
+    return tiles
+  },
+
+  newTile (x, y) {
+    let tile
+    let letter = TilesCtrl.randomAtoZ()
+    tile = {
+      x: x,
+      y: y,
+      character: letter.character,
+      score: letter.score,
+      id: `x${x}-y${y}`,
+      shifted: 0
+    }
+    return tile
+  },
+
+  replaceTiles(played, tiles) {
+    for (let key in tiles) {
+      tiles[key].shifted = 0
+    }
+
+    let shifts = {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0}
+    for (let key in played) {
+      let x = played[key].x
+      shifts[x] += 1
+    }
+
+    for (let key in played) {
+      let x = played[key].x
+      let y = played[key].y
+
+      for (let i = y; i >= 0; i --) {
+        let pos = `x${x}-y${i}`
+        let abovePos = `x${x}-y${i - 1}`
+
+        if (i === 0) {
+          tiles[pos] = TilesCtrl.newTile(x, i)
+          tiles[pos].shifted = shifts[x]
+          continue
+        }
+        tiles[pos].character = tiles[abovePos].character
+        tiles[pos].score = tiles[abovePos].score
+        tiles[pos].shifted = shifts[x]
       }
     }
     return tiles

@@ -69,7 +69,7 @@ const GameCtrl = {
     })
   },
 
-  playWord: (word, tally) => {
+  playWord: (word, tiles, tally) => {
     if (!GameCtrl.isGamePlayer(game)) return
     let game = GameCtrl.currentGame()
     let player = GameCtrl.currentPlayer()
@@ -78,6 +78,8 @@ const GameCtrl = {
     game.lastWord = word
     game.players[opponent].life -= tally
     if (game.players[opponent].life <= 0) game.winner = player
+
+    game.tiles = TilesCtrl.replaceTiles(tiles, game.tiles)
 
     return getRef(path + '/' + game.key).update(game).then(data => {
       return GameCtrl.nextTurn(game)
@@ -92,8 +94,7 @@ const GameCtrl = {
     } else {
       game.playerTurn = 1
     }
-    let tiles = TilesCtrl.generateTiles()
-    game.tiles = tiles
+
     return getRef(path + '/' + game.key).update(game).then(data => {
       return game
     })

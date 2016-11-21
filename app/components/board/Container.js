@@ -43,7 +43,6 @@ class Container extends Component {
 
     return (
       <div className='ss-board'>
-        <Test />
         <div className='layout-row layout-align-space-between'>
           <div className='layout-row'>
             <h3 className={`${this.isActive(0)} name`}>{playerKeys[0]}</h3>

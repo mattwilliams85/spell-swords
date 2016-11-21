@@ -14,9 +14,6 @@
       border: 2px solid #ccc;
       color: #333;
     }
-    .tile {
-      opacity: 0.7;
-    }
     .character-wrap .player-1 {
       filter: brightness(70%);
     }
@@ -143,10 +140,9 @@
 
 .letters-wrap {
   position: absolute;
-  bottom: 28px;
+  bottom: 56px;
   left: 0;
   z-index: 99;
-  height: 126px;
   width: 100%;
 
   .letters {
@@ -168,7 +164,6 @@
   cursor: pointer;
   color: #efefef;
   font-size: 2.3rem;
-  transition: .2s;
   position: absolute;
   height: 57px;
   width: 57px;
@@ -182,22 +177,21 @@
 
   .hover-box {
     position: absolute;
-    height: 40px;
-    width: 40px;
+    height: 35px;
+    width: 35px;
     top: 0; left: 0; right: 0; bottom: 0;
     margin: auto auto;
   }
 
-  &:hover {
+  &:hover:not(.active) {
     filter: brightness(90%);
-    transform: perspective(1px) scale(0.9)
+    transform: perspective(1px) scale(0.9) !important;
   }
 
 
   @for $i from 0 through 7 {
     &.x#{$i} {
       left: #{($i * 57) + ($i * 2)}px;
-      animation: bounce #{($i * .05) + .5}s;
     }
   }
 
@@ -206,6 +200,27 @@
       top: #{($i * 57) + ($i * 2)}px;
     }
   }
+
+  &.start {
+    @for $i from 0 through 7 {
+      &.x#{$i} {
+        animation: bounce #{($i * .05) + .5}s;
+      }
+    }
+  }
+
+  // @for $i from 1 through 5 {
+  //   &.shifted-#{$i} {
+  //     animation: shift#{$i} 1s
+  //   }
+  // }
+  &.shifted-1 {  animation: shiftedOne .5s }
+  &.shifted-2 {  animation: shiftedTwo .5s }
+  &.shifted-3 {  animation: shiftedThree .5s }
+  &.shifted-4 {  animation: shiftedFour .5s }
+  &.shifted-5 {  animation: shiftedFive .5s }
+
+
 
   .score {
     position: absolute;
@@ -220,33 +235,15 @@
   span {
     color: #efefef;
   }
-  &.selected {
-    -webkit-filter: brightness(120%);
-    span {
-      transform: scale(1.5);
-    }
+
+  &.opponent-active {
+    background-image: url("/img/tile-red.png");
   }
 
   &.active {
     background-image: url("/img/tile-blue.png");
   }
-  // &.black {
-  //   background: url('../tile-black.png');
-  //   color: #444;
-  // }
-  // &.blue {
-  //   background-image: url("../tile-blue.png");
-  // }
-  // &.orange {
-  //   background-image: url("../tile-yellow.png");
-  // }
-  // &.red {
-  //   background-image: url("../tile-red.png");
-  // }
-  // &.blank {
-  //   background-image: url("../tile-blank.png");
-  //   pointer-events: none;
-  // }
+
 }
 
 @keyframes bounce {
@@ -269,6 +266,88 @@
   }
   100% {
     opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes shiftedOne {
+  0% {
+    transform: translate3d(0, -57px, 0);
+  }
+  60% {
+    transform: translate3d(0, -5px, 0);
+  }
+  75% {
+
+    transform: translate3d(0, 3px, 0);
+  }
+  90% {
+    transform: translate3d(0, -2px, 0);
+  }
+}
+
+@keyframes shiftedTwo {
+  0% {
+    transform: translate3d(0, -114px, 0);
+  }
+  60% {
+    transform: translate3d(0, -5px, 0);
+  }
+  75% {
+
+    transform: translate3d(0, 3px, 0);
+  }
+  90% {
+    transform: translate3d(0, -2px, 0);
+  }
+}
+
+@keyframes shiftedThree {
+  0% {
+    transform: translate3d(0, -114px, 0);
+  }
+  60% {
+    transform: translate3d(0, -25px, 0);
+  }
+  75% {
+    transform: translate3d(0, 15px, 0);
+  }
+  90% {
+    transform: translate3d(0, -10px, 0);
+  }
+}
+
+@keyframes shiftedFour {
+  0% {
+    transform: translate3d(0, -228px, 0);
+  }
+  60% {
+    transform: translate3d(0, -5px, 0);
+  }
+  75% {
+
+    transform: translate3d(0, 3px, 0);
+  }
+  90% {
+    transform: translate3d(0, -2px, 0);
+  }
+}
+
+@keyframes shiftedFive {
+  0% {
+    transform: translate3d(0, -286px, 0);
+  }
+  60% {
+    transform: translate3d(0, -5px, 0);
+  }
+  75% {
+
+    transform: translate3d(0, 3px, 0);
+  }
+  90% {
+    transform: translate3d(0, -2px, 0);
+  }
+  100% {
     transform: none;
   }
 }

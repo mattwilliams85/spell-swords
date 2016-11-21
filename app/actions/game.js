@@ -50,8 +50,8 @@ export function skipTurn () {
   }
 }
 
-export function playWord (word, tally) {
-  const request = GameCtrl.playWord(word, tally)
+export function playWord (word, tiles, tally) {
+  const request = GameCtrl.playWord(word, tiles, tally)
   return {
     type: 'UPDATE_GAME_SUCCESS',
     payload: request

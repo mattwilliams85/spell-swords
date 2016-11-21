@@ -22,12 +22,16 @@ class Board extends Component {
       word: [],
       activeTiles: {},
       tally: 0,
-      wrong: false
+      wrong: false,
+      start: true
     }
   }
 
   componentDidMount () {
     window.addEventListener('mouseup', this.handleMouseUp)
+    setTimeout(() => {
+      {this.setState({start: false})}
+    }, 800)
   }
 
   componentWillUnmount () {
@@ -35,10 +39,11 @@ class Board extends Component {
     clearInterval(this.timer)
   }
 
-  componentWillUpdate (nextProps, nextState) {
-    if (this.props.playerTurn !== nextProps.playerTurn) {
-      this.setState({time: 30000})
-    }
+  componentWillReceiveProps (nextProps, nextState) {
+    this.setState({updating: true})
+    setTimeout(() => {
+      {this.setState({updating: false})}
+    }, 750)
   }
 
   getScore () {
@@ -62,8 +67,8 @@ class Board extends Component {
   handleMouseUp () {
     let spelledWord = this.state.word.join('')
     if (TilesCtrl.validateWord(spelledWord) && !this.isDisabled()) {
-      this.setState({time: 30000})
-      this.props.playWord(spelledWord, this.state.tally)
+      this.setState({updating: true})
+      this.props.playWord(spelledWord, this.state.activeTiles, this.state.tally)
     } else {
       this.setState({wrong: true})
     }
@@ -74,7 +79,7 @@ class Board extends Component {
 
   handleMouseOver (tile) {
     if (!this.state.hoverEvents) return
-    if (this.state.activeTiles[tile.key]) return
+    if (this.state.activeTiles[tile.id]) return
     if (this.state.word.length > 18) return
     let prev = this.state.previousTile
     if (
@@ -102,16 +107,16 @@ class Board extends Component {
   }
 
   pushTile (tile) {
-    this.addToActiveTiles(tile.key)
+    this.addToActiveTiles(tile)
     this.addToWord(tile.character)
     this.addToTally(tile.score)
     this.setState({previousTile: tile})
   }
 
-  addToActiveTiles (key) {
-    let tile = {}
-    tile[key] = true
-    let activeTiles = Object.assign({}, this.state.activeTiles, tile)
+  addToActiveTiles (tile) {
+    let newActive = {}
+    newActive[tile.id] = tile
+    let activeTiles = Object.assign({}, this.state.activeTiles, newActive)
     this.setState({activeTiles: activeTiles})
   }
 
@@ -124,8 +129,12 @@ class Board extends Component {
     this.setState({tally: tally + score})
   }
 
-  isActiveTile (key) {
-    if (this.state.activeTiles[key]) return'active'
+  tileClasses (tile) {
+    let name = ''
+    if (tile.shifted && this.state.updating) name += ` shifted-${tile.shifted}`
+    if (this.state.activeTiles[tile.id] && !this.state.updating) name += ' active'
+    if (this.state.start) name += ' start'
+    return name
   }
 
   isWrong (key) {
@@ -184,12 +193,12 @@ class Board extends Component {
         <div className='turn-msg'>{this.turnMsg()}</div>
 
         <div className='tile-wrap'>
-          { this.props.tiles.map(tile => {
+          { this.props.tileArray.map(tile => {
             return (
-              <Motion style={{x: spring(this.isWrong(tile.key) ? 30 : 0, {stiffness: 750, damping: 7, precision: 0.1})}} key={tile.key}>
+              <Motion style={{x: spring(this.isWrong(tile.id) ? 30 : 0, {stiffness: 750, damping: 7, precision: 0.1})}} key={tile.id}>
                 {({x}) =>
                   <div
-                    className={`x${tile.x} y${tile.y} ${this.isActiveTile(tile.key)} tile`}
+                    className={`x${tile.x} y${tile.y} ${this.tileClasses(tile)} tile`}
                     onMouseDown={this.handleMouseDown.bind(this, tile)}
                     style={{
                       WebkitTransform: `translate3d(${x}px, 0, 0)`,
@@ -225,9 +234,10 @@ const mapStateToProps = (state) => {
     players: game.players,
     playerTurn: game.playerTurn,
     turnCount: game.turnCount,
-    tiles: game.tiles,
     tally: game.tally,
-    winner: game.winner
+    winner: game.winner,
+    tiles: game.tiles,
+    tileArray: Object.keys(game.tiles).map(function (key) { return game.tiles[key] })
   }
 }
 

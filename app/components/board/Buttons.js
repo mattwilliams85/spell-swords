@@ -16,7 +16,6 @@ class Actions extends Component {
   }
 
   handleClick () {
-    console.log('wu')
     alert('Wished these sweet looking buttons did something? Dont worry! The game is still a work in progress, check back soon for future updates.')
   }
 
