@@ -43,8 +43,8 @@ jspm_packages
 .vscode
 firebase-debug.log
 
-#
-dist
+# heroku-only
+
 
 misc
 .DS_Store
